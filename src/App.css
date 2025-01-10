@@ -3,3 +3,30 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root{
+  --bg-color-1: #1F1F22;
+  --bg-color-2: #1A1A1E;
+  --bg-color-3: #26272D;
+  --bg-color-4: rgba(126,18,241,1);
+  --bg-color-5: rgba(238,29,232,1); 
+  --bg-color-6: #000000;
+  --text-color-1: rgb(255, 255, 255);
+  --text-color-2: rgb(190, 190, 190);
+  --text-color-3: rgb(163, 163, 163);
+  --text-color-4: rgb(81, 146, 245);
+  --text-color-5: rgb(151, 151, 151);
+  --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
+  --button-shadow: var(--bg-color-2);
+  --red-color: #f81818;
+  --red-color-disabled: #fa4646;
+  --white-color: #fff;
+}
+
+body{
+  background-color: rgb(22, 21, 21) !important;
+}
+
+.form-container{
+  background-color: var(--bg-color-2);
+}
