@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Chats from './pages/Chats';
 import Login from './pages/Login';
@@ -34,7 +35,7 @@ const App = () => {
   return (
     <Router>
       <Layout>
-        <Container className='h-100 d-flex justify-content-center align-items-center'>
+        <Container className='h-100 d-flex justify-content-center align-items-center p-0'>
           <Routes>
             <Route exact path='/login' element={<Login/>}/>
             <Route exact path='/register' element={<Register/>}/>
