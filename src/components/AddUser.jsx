@@ -53,7 +53,7 @@ const AddUser = (props) => {
     className='dialog-box'
   >
     <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-vcenter" className='text-white'>
+      <Modal.Title id="contained-modal-title-vcenter" className='text-1'>
         Start a new Chat!
       </Modal.Title>
     </Modal.Header>
@@ -62,7 +62,7 @@ const AddUser = (props) => {
             type="text" 
             placeholder="type username here" value={userInput} 
             onChange={(e)=>setUserInput(e.target.value)}
-            className='fs-6 p-2 rounded-1 border-0'
+            className='fs-6 p-2 rounded-1 border-0 input-1'
         />
         <ListGroup style={{maxHeight: '150px'}} className='overflow-y-auto mt-2'>
             {
@@ -70,8 +70,8 @@ const AddUser = (props) => {
 
                     return <ListGroup.Item key={user.uid} className='d-flex align-items-center py-2 '>
                             <Image src={user.profileImg} alt={user.uid} className='profile-avatar object-fit-cover' roundedCircle/>
-                            <h6 className='px-2 m-0 w-100'>{user.username}</h6>
-                            <Button className=''>Add</Button>
+                            <h6 className='px-2 m-0 w-100 text-1'>{user.username}</h6>
+                            <Button className='' onClick={handleAdd}>Add</Button>
                     </ListGroup.Item>
                 })
             }

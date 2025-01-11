@@ -17,31 +17,48 @@ const Chats = () => {
   const [addGroupStatus, setAddGroupStatus] = useState(false)
   const [chatInfo, setChatInfo] = useState(false)
   const {currentChat} = useSelector(state=>state.chats.data)
+  const [open, setOpen] = useState(true)
+
+  
+  const handleResize = () =>{
+    let resizeTimer
+    document.body.classList.add("stop-resize-animation");
+    if(resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove("stop-resize-animation");
+    }, 400);
+  }
+
 
   useEffect(()=>{
     if(Object.keys(currentChat).length !== 0) {
         setChatInfo(false)
-    }
+        setOpen(false)
+    }else setOpen(true)
 }, [currentChat])
 
   useEffect(()=>{
     document.title = 'ChatApp | Chats'    
+    window.addEventListener('resize', handleResize)
+        
+    return () => window.removeEventListener('resize', handleResize)
   },[])
 
   return (
     <Row
-    style={{width: '1024px', height: '70vh'}} 
-    className='container-c p-0 m-0 position-relative'>
+    style={{height: '70vh'}} 
+    className='container-c p-0 m-0 position-relative w-100'>
       <AddUser show={addUserStatus} onHide={()=>setAddUserStatus(false)}/>
       <AddGroup show={addGroupStatus} onHide={()=>setAddGroupStatus(false)}/>
         <Col 
           lg={4} 
-          className='container-cl px-0 py-2 d-flex flex-column'
+          className={`container-cl px-0 py-3 d-flex flex-column ${open?'container-cl-active':''}`}
+
         >
           <UserInfoHeader />
           <SearchUsers setSearch={setSearch} search={search}/>
-          <ChatList search={search}/>
-          <div className="btn-groups p-2 d-flex justify-content-end gap-2">
+          <ChatList search={search} setOpen={setOpen}/>
+          <div className="btn-groups px-3 d-flex justify-content-end gap-2">
             <Button className='fs-4 py-1 px-2 border-0' onClick={()=>setAddUserStatus(true)}>
               <i class="bi bi-plus"></i>
             </Button>
@@ -59,7 +76,7 @@ const Chats = () => {
                         !chatInfo?<ActiveChat setChatInfo={setChatInfo}/>: <CurrentChatInfo setChatInfo={setChatInfo}/>
                 ): (
                     <div className='empty-chat-container d-flex justify-content-center align-items-center h-100 w-100'>
-                        <h1 className='fs-4 text-center text-secondary'>Select a chat to start a conversation.</h1>
+                        <h1 className='fs-4 text-center text-2'>Select a chat to start a conversation.</h1>
                     </div>
                 )
             }

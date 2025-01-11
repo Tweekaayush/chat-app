@@ -4,7 +4,7 @@ import { checkBlocked, clearBlocked, getChatList, getCommonGroups, getGroupList,
 import {ListGroup, Image} from 'react-bootstrap'
 import {format} from 'timeago.js'
 
-const ChatList = ({search}) => {
+const ChatList = ({search, setOpen}) => {
     const {chatList, groupList, currentChat} = useSelector(state=>state.chats.data)
     const {uid, blocked} = useSelector(state=>state.user.data)
     const dispatch = useDispatch()
@@ -31,6 +31,7 @@ const ChatList = ({search}) => {
         })
 
         dispatch(updateGroupList(newChatList))
+        setOpen(false)
 
     }
 
@@ -64,6 +65,7 @@ const ChatList = ({search}) => {
         })
 
         dispatch(updateChatList(newChatList))
+        setOpen(false)
     }
 
     useEffect(()=>{
@@ -91,14 +93,14 @@ const ChatList = ({search}) => {
     }, [search, groupList, chatList])
 
   return (
-    <ListGroup className='border-0 flex-grow-1 overflow-y-auto'>
+    <ListGroup className='border-0 flex-grow-1 overflow-y-auto mb-3'>
         {
             list?.length !== 0?(
                 list?.map((chat)=>{
                     return chat?.admin === undefined?(
                         <ListGroup.Item 
                             key={chat.chatId}
-                            className='bg-transparent px-2 py-3 d-flex align-items-center' 
+                            className='bg-transparent p-3 d-flex align-items-center' 
                             role='button'
                             onClick={()=>handleClick(chat)}
                         >
@@ -108,22 +110,22 @@ const ChatList = ({search}) => {
                                 roundedCircle
                             />
                             <div className='w-100 px-2'>
-                                <h4 className='mb-1 fs-6 text-white ellipses'>{chat.username}</h4>
+                                <h4 className='mb-1 fs-6 text-1 ellipses'>{chat.username}</h4>
                                 {  
                                     chat.lastMessage &&             
-                                    <p className='ellipses m-0 text-secondary'>
+                                    <p className='ellipses m-0 text-2'>
                                         {chat.lastMessage}  
                                     </p>
                                 }
                             </div>
-                            <p className='m-0 fw-light text-secondary text-end' style={{fontSize: '12px', width: '100px'}}>
+                            <p className='m-0 fw-light text-2 text-end' style={{fontSize: '12px', width: '100px'}}>
                                 {format(chat.updatedAt)}
                             </p>
                         </ListGroup.Item>
                     ):(
                         <ListGroup.Item 
                             key={chat.chatId}
-                            className='bg-transparent px-2 py-3 d-flex align-items-center' 
+                            className='bg-transparent p-3 d-flex align-items-center' 
                             role='button'
                             onClick={()=>handleGroupClick(chat)}
                         >
@@ -133,15 +135,15 @@ const ChatList = ({search}) => {
                                 roundedCircle
                             />
                             <div className='w-100 px-2'>
-                                <h4 className='mb-1 fs-6 text-white ellipses'>{chat.groupName}</h4>
+                                <h4 className='mb-1 fs-6 text-1 ellipses'>{chat.groupName}</h4>
                                 {  
                                     chat.lastMessage &&             
-                                    <p className='ellipses m-0 text-secondary'>
+                                    <p className='ellipses m-0 text-2'>
                                         {chat.lastMessage}  
                                     </p>
                                 }
                             </div>
-                            <p className='m-0 fw-light text-secondary text-end' style={{fontSize: '12px', width: '100px'}}>
+                            <p className='m-0 fw-light text-2 text-end' style={{fontSize: '12px', width: '100px'}}>
                                 {format(chat.updatedAt)}
                             </p>
                         </ListGroup.Item>

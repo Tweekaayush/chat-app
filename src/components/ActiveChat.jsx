@@ -13,7 +13,7 @@ const ActiveChat = ({setChatInfo}) => {
   return (
     <Container fluid={true} className='p-0 d-flex flex-column h-100'>
       <ActiveChatHeader setChatInfo={setChatInfo}/>
-      <Container className='overflow-y-auto h-100 d-flex flex-column pt-4'>
+      <Container className='overflow-y-auto h-100 d-flex flex-column p-3' fluid>
         {
           messages?.map((message)=>{
             return admin===undefined?(
@@ -26,12 +26,12 @@ const ActiveChat = ({setChatInfo}) => {
                   roundedCircle
                 />
                 <div className="text-box px-2 mw-100 text-break">
-                  <p className="text fs-6 text-white p-3 m-0">
+                  <p className="text fs-6 text-1 p-3 m-0">
                     {
                       message?.text
                     }
                   </p>
-                  <p className='m-0 text-secondary' style={{fontSize: '12px'}}>
+                  <p className='m-0 text-2' style={{fontSize: '12px'}}>
                     {
                       format(message.createdAt.toDate())
                     }
@@ -48,13 +48,13 @@ const ActiveChat = ({setChatInfo}) => {
                   roundedCircle
                 />
                 <div className="text-box px-2 mw-100 text-break">
-                  <p className="text fs-6 text-white p-3 m-0 d-flex flex-column">
+                  <p className="text fs-6 text-1 p-3 m-0 d-flex flex-column">
                     <span className='fw-bolder mb-2'>{message.username}</span>
                     {
                       message?.text
                     }
                   </p>
-                  <p className='m-0 text-secondary' style={{fontSize: '12px'}}>
+                  <p className='m-0 text-2' style={{fontSize: '12px'}}>
                     {
                       format(message.createdAt.toDate())
                     }

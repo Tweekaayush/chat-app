@@ -87,31 +87,31 @@ const Login = () => {
         style={{maxWidth: '450px'}}
     >
         <h1 
-            className='text-white fs-3 text-center'
+            className='text-1 fs-3 text-center'
         >
             Welcome
         </h1>
-        <p className='text-secondary text-center'>
+        <p className='text-2 text-center'>
             We are so excited to see you!
         </p>
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="form-group-id" className='mb-3'>
-                <Form.Label className='text-white '>Email</Form.Label>
+                <Form.Label className='text-1 '>Email</Form.Label>
                 <Form.Control 
                     name='email'
                     type="email" 
                     value={formData.email}
-                    className='p-2 rounded-1 border-0 fs-5'
+                    className='p-2 rounded-1 border-0 fs-5 input-1'
                     onChange={handleChange}
                 />
             </Form.Group>
             <Form.Group controlId="form-group-id" className='mb-3'>
-                <Form.Label className='text-white '>Password</Form.Label>
+                <Form.Label className='text-1 '>Password</Form.Label>
                 <Form.Control 
                     name='password'
                     type="password" 
                     value={formData.password}
-                    className='p-2 rounded-1 border-0 fs-5'
+                    className='p-2 rounded-1 border-0 fs-5 input-1'
                     onChange={handleChange}
                 />
             </Form.Group>
@@ -122,7 +122,7 @@ const Login = () => {
                 Login
             </Button>
         </Form>
-        <p className='text-secondary'>
+        <p className='text-2'>
             Don't have an Account? <Link to='/register'>Register</Link>
         </p>
     </Container>

@@ -12,10 +12,7 @@
   --bg-color-5: rgba(238,29,232,1); 
   --bg-color-6: #000000;
   --text-color-1: rgb(255, 255, 255);
-  --text-color-2: rgb(190, 190, 190);
-  --text-color-3: rgb(163, 163, 163);
-  --text-color-4: rgb(81, 146, 245);
-  --text-color-5: rgb(151, 151, 151);
+  --text-color-2: rgb(119, 119, 119);
   --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
   --button-shadow: var(--bg-color-2);
   --red-color: #f81818;
@@ -23,26 +20,40 @@
   --white-color: #fff;
 }
 
+.stop-resize-animation *{
+  transition: none !important;
+  animation: none !important;
+}
+
 body{
   background-color: rgb(22, 21, 21) !important;
+}
+
+
+.text-1{
+  color: var(--text-color-1) !important;
+}
+
+.text-2{
+  color: var(--text-color-2) !important;
+}
+
+.input-1{
+  background-color: var(--bg-color-3) !important;
+  color: var(--text-color-1) !important;
+}
+
+.input-1::placeholder{
+  color: var(--text-color-2) !important;
 }
 
 .form-container{
   background-color: var(--bg-color-2);
 }
 
-.pg-overlay{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.349);
-  z-index: 100;
-}
-
 .container-cl{
   background-color: var(--bg-color-1);
+  z-index: 100;
 }
 
 .container-cr{
@@ -73,9 +84,6 @@ body{
   -webkit-box-orient: vertical;
 }
 
-.search-users-container > input::placeholder{
-  color: var(--text-color-3) !important;
-}
 
 .list-group::-webkit-scrollbar{
   width: 4px;
@@ -125,10 +133,6 @@ aside{
   background-color: var(--bg-color-1);
 }
 
-.dialog-box input{
-  background-color: var(--bg-color-3);
-}
-
 .dialog-box .list-group-item{
   background-color: transparent;
 }
@@ -145,8 +149,38 @@ aside{
   background-image: var(--button-color-1);
 }
 
+.settings-header, .settings-nav{
+  background-color: var(--bg-color-1);
+}
+
+.settings-content{
+  background-color: var(--bg-color-2) !important;
+}
+
+.nav-pills .active{
+  background-color: var(--bg-color-2) !important;
+}
+
+
+@media screen and (max-width: 992px) {
+  .container-cl{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+}
+
 @media screen and (max-width: 480px) {
   aside{
     right: -70px;
   }
+}
+
+
+.container-cl-active{
+  transform: translateX(0);
 }

@@ -115,48 +115,48 @@ const Register = () => {
         style={{maxWidth: '450px'}}
     >
         <h1 
-            className='text-white fs-3 text-center mb-4'
+            className='text-1 fs-3 text-center mb-4'
         >
             Create an Account!
         </h1>
         <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="form-group-id" className='mb-3'>
-                <Form.Label className='text-white '>Email</Form.Label>
+            <Form.Group controlId="form-email" className='mb-3'>
+                <Form.Label className='text-1 '>Email</Form.Label>
                 <Form.Control 
                     name='email'
                     type="email" 
                     value={formData.email}
-                    className='p-2 rounded-1 border-0 fs-5'
+                    className='input-1 p-2 rounded-1 border-0 fs-5'
                     onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})}
                 />
             </Form.Group>
-            <Form.Group controlId="form-group-id" className='mb-3'>
-                <Form.Label className='text-white '>Name</Form.Label>
+            <Form.Group controlId="form-name" className='mb-3'>
+                <Form.Label className='text-1 '>Name</Form.Label>
                 <Form.Control 
                     name='name'
                     type="text" 
                     value={formData.name}
-                    className='p-2 rounded-1 border-0 fs-5'
+                    className='p-2 rounded-1 border-0 fs-5 input-1'
                     onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})}
                 />
             </Form.Group>
-            <Form.Group controlId="form-group-id" className='mb-3'>
-                <Form.Label className='text-white '>Password</Form.Label>
+            <Form.Group controlId="form-password" className='mb-3'>
+                <Form.Label className='text-1 '>Password</Form.Label>
                 <Form.Control 
                     name='password'
                     type="password" 
                     value={formData.password}
-                    className='p-2 rounded-1 border-0 fs-5'
+                    className='p-2 rounded-1 border-0 fs-5 input-1'
                     onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})}
                 />
             </Form.Group>
-            <Form.Group controlId="form-group-id" className='mb-3'>
-                <Form.Label className='text-white '>Confirm Password</Form.Label>
+            <Form.Group controlId="form-confirm-password" className='mb-3'>
+                <Form.Label className='text-1 '>Confirm Password</Form.Label>
                 <Form.Control 
                     name='confirmPassword'
                     type="password" 
                     value={formData.confirmPassword}
-                    className='p-2 rounded-1 border-0 fs-5'
+                    className='p-2 rounded-1 border-0 fs-5 input-1'
                     onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})}
                 />
             </Form.Group>
@@ -167,7 +167,7 @@ const Register = () => {
                 Login
             </Button>
         </Form>
-        <p className='text-secondary'>
+        <p className='text-2'>
             Already have an Account? <Link to='/'>Login</Link>
         </p>
     </Container>

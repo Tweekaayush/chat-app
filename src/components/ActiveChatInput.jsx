@@ -34,11 +34,11 @@ const ActiveChatInput = () => {
     <div className="active-chat-input p-3">
       {
         isCurrentUserBlocked ? (
-          <p className='blocked-message text-secondary m-0 p-3 text-center rounded-1'>
+          <p className='blocked-message text-2 m-0 p-3 text-center rounded-1'>
             You cannot reply to this conversation.
           </p>
         ): isReceiverBlocked?(
-          <p className='blocked-message text-secondary m-0 p-3 text-center rounded-1'>
+          <p className='blocked-message text-2 m-0 p-3 text-center rounded-1'>
             You have blocked this user.
           </p>
         ):(
@@ -47,7 +47,7 @@ const ActiveChatInput = () => {
               <Form.Control 
                 type="text" 
                 placeholder="Type Your Message Here..." 
-                className='p-3 fs-6 border-0'
+                className='p-3 fs-6 border-0 input-1'
                 value={text}
                 onChange={handleChange}
                 aria-describedby="basic-addon1"

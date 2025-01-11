@@ -22,7 +22,7 @@ const UserInfoHeader = () => {
       }
 
   return (
-    <div className="user-info-header p-2 d-flex justify-content-between">
+    <div className="user-info-header px-3 d-flex justify-content-between mb-3">
         <div className="user-info d-flex align-items-center">
             <Image
                 src={profileImg} 
@@ -30,7 +30,7 @@ const UserInfoHeader = () => {
                 roundedCircle
                 className='profile-avatar object-fit-cover'
             />
-            <h5 className='text-white m-0 fs-6 px-2 fw-medium'>
+            <h5 className='text-1 m-0 fs-6 px-2 fw-medium'>
                 {username}
             </h5>
         </div>

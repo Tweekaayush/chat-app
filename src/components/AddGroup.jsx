@@ -84,7 +84,7 @@ const AddGroup = (props) => {
         className='dialog-box'
     >
         <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter" className='text-white'>
+        <Modal.Title id="contained-modal-title-vcenter" className='text-1'>
             Create a new Group!
         </Modal.Title>
         </Modal.Header>
@@ -101,9 +101,10 @@ const AddGroup = (props) => {
                         placeholder="Group Name" 
                         value={groupName} 
                         onChange={(e)=>setGroupName(e.target.value)} 
+                        className='input-1 rounded-1 border-0'
                     />
                 </Form.Group>
-                <Form.Group controlId="form-group-id">
+                <Form.Group controlId="form-name">
                     <div className="members mb-2 pb-1 overflow-x-auto d-flex gap-2">
                         {members.map((member)=>{
                             return <Button 
@@ -122,9 +123,9 @@ const AddGroup = (props) => {
                     </div>
                     <Form.Control 
                         type="text" 
-                        placeholder="type username here" value={userInput} 
+                        placeholder="search usernames here" value={userInput} 
                         onChange={(e)=>setUserInput(e.target.value)}
-                        className='fs-6 p-2 rounded-1 border-0'
+                        className='fs-6 p-2 rounded-1 border-0 input-1'
                         />
                     <ListGroup style={{maxHeight: '150px'}} className='overflow-y-auto mt-2'>
                         {

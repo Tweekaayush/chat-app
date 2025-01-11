@@ -11,7 +11,7 @@ const Footer = () => {
   }, [])
 
   return (
-    <footer className='text-secondary text-center p-2'>
+    <footer className='text-2 text-center p-2'>
       {date} &copy; Aayush Dobriyal
     </footer>
   )

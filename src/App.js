@@ -35,7 +35,11 @@ const App = () => {
   return (
     <Router>
       <Layout>
-        <Container className='h-100 d-flex justify-content-center align-items-center p-0'>
+        <Container 
+          fluid
+          className='h-100 d-flex justify-content-center align-items-center p-0 flex-column overflow-hidden rounded-1'
+          style={{maxWidth: '1024px', height: '70vh'}}
+        >
           <Routes>
             <Route exact path='/login' element={<Login/>}/>
             <Route exact path='/register' element={<Register/>}/>
