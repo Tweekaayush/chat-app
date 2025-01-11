@@ -38,10 +38,10 @@ const Settings = () => {
           <Col lg={4} className='settings-nav p-0 pb-lg-3'>
             <Nav variant="pills" className="flex-lg-column">
               <Nav.Item>
-                <Nav.Link eventKey="first" className='rounded-0 p-3 text-1'>Profile Settings</Nav.Link>
+                <Nav.Link eventKey="first" className='rounded-0 p-3 text-1'>Profile</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second" className='rounded-0 p-3 text-1'>App Settings</Nav.Link>
+                <Nav.Link eventKey="second" className='rounded-0 p-3 text-1'>Themes</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>

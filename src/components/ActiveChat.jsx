@@ -27,7 +27,7 @@ const ActiveChat = ({setChatInfo}) => {
                   roundedCircle
                 />
                 <div className="text-box px-2 mw-100 text-break">
-                  <p className="text fs-6 text-1 px-3 py-2 m-0">
+                  <p className="text fs-6 text-3 px-3 py-2 m-0">
                     {
                       message?.text
                     }
@@ -49,8 +49,8 @@ const ActiveChat = ({setChatInfo}) => {
                   roundedCircle
                 />
                 <div className="text-box px-2 mw-100 text-break">
-                  <p className="text fs-6 text-1 px-3 py-2 m-0 d-flex flex-column">
-                    <span className='fw-bolder mb-2'>{message.username}</span>
+                  <p className="text fs-6 text-3 px-3 py-2 m-0 d-flex flex-column">
+                    <span className='fw-bolder mb-2 ellipses text-1'>{message?.username.split(' ')[0]}</span>
                     {
                       message?.text
                     }

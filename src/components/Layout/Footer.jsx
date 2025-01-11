@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <footer className='text-2 text-center p-2'>
-      {date} &copy; Aayush Dobriyal
+      Copyright {date} &copy; Aayush Dobriyal
     </footer>
   )
 }

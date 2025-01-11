@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Manrope:wght@200..800&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -10,14 +12,23 @@
   --bg-color-3: #26272D;
   --bg-color-4: rgba(126,18,241,1);
   --bg-color-5: rgba(238,29,232,1); 
-  --bg-color-6: #000000;
+  --bg-color-6: #0e0e0e;
+  --text-color-1: rgb(230, 230, 230);
+  --text-color-2: rgb(119, 119, 119);
+  --text-color-3: rgb(209, 209, 209);
+  --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
+}
+
+[data-theme='forest']{
+  --bg-color-1: #1F1F22;
+  --bg-color-2: #1A1A1E;
+  --bg-color-3: #26272D;
+  --bg-color-4: rgba(126,18,241,1);
+  --bg-color-5: rgba(238,29,232,1); 
+  --bg-color-6: #0e0e0e;
   --text-color-1: rgb(255, 255, 255);
   --text-color-2: rgb(119, 119, 119);
   --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
-  --button-shadow: var(--bg-color-2);
-  --red-color: #f81818;
-  --red-color-disabled: #fa4646;
-  --white-color: #fff;
 }
 
 ::-webkit-scrollbar{
@@ -39,6 +50,7 @@
 
 body{
   background-color: var(--bg-color-6) !important;
+  font-family: "Kanit", serif;
 }
 
 
@@ -48,6 +60,9 @@ body{
 
 .text-2{
   color: var(--text-color-2) !important;
+}
+.text-3{
+  color: var(--text-color-3) !important;
 }
 
 .input-1{
@@ -117,6 +132,14 @@ body{
 .owner .text{
   background-image: var(--button-color-1);
   border-radius: 8px 8px 0 8px;
+}
+
+.owner p:last-of-type{
+  text-align: right;
+}
+
+.emoji-picker{
+  background-color: var(--bg-color-3);
 }
 
 .blocked-message{

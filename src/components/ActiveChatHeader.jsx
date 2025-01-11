@@ -22,7 +22,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
   return (
         admin===undefined?(
             <div className='d-flex p-2 p-sm-3 align-items-center active-chat-header'>
-                <Button className='border-0 bg-transparent p-0 pe-2 fs-5' onClick={handleBack}>
+                <Button className='border-0 bg-transparent p-0 pe-2 pe-sm-3 fs-5' onClick={handleBack}>
                     <i class="bi bi-arrow-left"></i>
                 </Button>
                 <Image 
@@ -32,7 +32,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
                     onClick={handleClick}
                 />
                 <div className='ps-2 flex-grow-1' onClick={handleClick}>
-                    <h1 className='fs-6 text-1 m-0'>{username}</h1>
+                    <h1 className='fs-6 text-1 m-0 ellipses'>{username}</h1>
                     <p className='m-0 text-2 fs-6 ellipses'>{status}</p>
                 </div>
                 <Button 
@@ -45,7 +45,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
             </div>
         ):(
             <div className='d-flex p-2 p-sm-3 align-items-center active-chat-header'>
-                <Button className='border-0 bg-transparent p-0 pe-2 fs-5' onClick={handleBack}>
+                <Button className='border-0 bg-transparent p-0 pe-2 pe-sm-3 fs-5' onClick={handleBack}>
                     <i class="bi bi-arrow-left"></i>
                 </Button>
                 <Image 
