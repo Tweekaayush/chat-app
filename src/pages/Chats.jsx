@@ -7,6 +7,8 @@ import { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import ActiveChat from '../components/ActiveChat'
 import CurrentChatInfo from '../components/CurrentChatInfo'
+import AddUser from '../components/AddUser'
+import AddGroup from '../components/AddGroup'
 
 const Chats = () => {
 
@@ -30,7 +32,8 @@ const Chats = () => {
     <Row
     style={{width: '1024px', height: '70vh'}} 
     className='container-c p-0 m-0 position-relative'>
-      <div className="pg-overlay" style={{display: addUserStatus||addGroupStatus?'block':'none'}}></div>
+      <AddUser show={addUserStatus} onHide={()=>setAddUserStatus(false)}/>
+      <AddGroup show={addGroupStatus} onHide={()=>setAddGroupStatus(false)}/>
         <Col 
           lg={4} 
           className='container-cl px-0 py-2 d-flex flex-column'

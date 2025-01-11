@@ -68,6 +68,7 @@ body{
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
+  line-clamp: 1;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
@@ -118,6 +119,30 @@ aside{
   position: absolute !important;
   right: 0;
   bottom: 60px;
+}
+
+.dialog-box .modal-content{
+  background-color: var(--bg-color-1);
+}
+
+.dialog-box input{
+  background-color: var(--bg-color-3);
+}
+
+.dialog-box .list-group-item{
+  background-color: transparent;
+}
+
+.members::-webkit-scrollbar{
+  height: 4px;
+}
+
+.members::-webkit-scrollbar-track{
+  background-color: var(--bg-color-3);
+}
+
+.members::-webkit-scrollbar-thumb{
+  background-image: var(--button-color-1);
 }
 
 @media screen and (max-width: 480px) {
