@@ -5,8 +5,8 @@ import {ListGroup, Image} from 'react-bootstrap'
 import {format} from 'timeago.js'
 
 const ChatList = ({search, setOpen}) => {
-    const {chatList, groupList, currentChat} = useSelector(state=>state.chats.data)
-    const {uid, blocked} = useSelector(state=>state.user.data)
+    const {chatList, groupList, currentChat} = useSelector(state=>state?.chats?.data)
+    const {uid, blocked} = useSelector(state=>state?.user?.data)
     const dispatch = useDispatch()
     const [list, setList] = useState([])
 
@@ -100,7 +100,7 @@ const ChatList = ({search, setOpen}) => {
                     return chat?.admin === undefined?(
                         <ListGroup.Item 
                             key={chat.chatId}
-                            className='bg-transparent p-3 d-flex align-items-center' 
+                            className='bg-transparent px-2 px-sm-3 py-3 d-flex align-items-center' 
                             role='button'
                             onClick={()=>handleClick(chat)}
                         >
@@ -125,7 +125,7 @@ const ChatList = ({search, setOpen}) => {
                     ):(
                         <ListGroup.Item 
                             key={chat.chatId}
-                            className='bg-transparent p-3 d-flex align-items-center' 
+                            className='bg-transparent px-2 px-sm-3 py-3 d-flex align-items-center' 
                             role='button'
                             onClick={()=>handleGroupClick(chat)}
                         >

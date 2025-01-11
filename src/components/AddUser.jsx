@@ -7,7 +7,7 @@ import { getUsers, clearUsers, addUser } from '../features/chatsSlice';
 const AddUser = (props) => {
     const [userInput, setUserInput] = useState('')
     const dispatch = useDispatch()
-    const {users: userList, chatList} = useSelector(state=>state.chats.data)
+    const {users: userList, chatList} = useSelector(state=>state?.chats?.data)
     const {uid} = useSelector(state=>state.user.data)
     const [filteredUsers, setFilteredUsers] = useState([])
 
@@ -19,6 +19,7 @@ const AddUser = (props) => {
 
     const handleAdd = (uid) =>{
         dispatch(addUser(uid))
+        props.onHide()
         setUserInput('')
     }
 
@@ -66,12 +67,12 @@ const AddUser = (props) => {
         />
         <ListGroup style={{maxHeight: '150px'}} className='overflow-y-auto mt-2'>
             {
-                filteredUsers.map((user)=>{
+                filteredUsers?.map((user)=>{
 
-                    return <ListGroup.Item key={user.uid} className='d-flex align-items-center py-2 '>
-                            <Image src={user.profileImg} alt={user.uid} className='profile-avatar object-fit-cover' roundedCircle/>
-                            <h6 className='px-2 m-0 w-100 text-1'>{user.username}</h6>
-                            <Button className='' onClick={handleAdd}>Add</Button>
+                    return <ListGroup.Item key={user?.uid} className='d-flex align-items-center py-2 px-0'>
+                            <Image src={user?.profileImg} alt={user?.uid} className='profile-avatar object-fit-cover' roundedCircle/>
+                            <h6 className='px-2 m-0 w-100 text-1'>{user?.username}</h6>
+                            <Button className='btn-1 border-0 rounded-1 fs-6' onClick={()=>handleAdd(user?.uid)}>Add</Button>
                     </ListGroup.Item>
                 })
             }

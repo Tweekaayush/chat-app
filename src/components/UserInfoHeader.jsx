@@ -22,7 +22,7 @@ const UserInfoHeader = () => {
       }
 
   return (
-    <div className="user-info-header px-3 d-flex justify-content-between mb-3">
+    <div className="user-info-header px-2 px-sm-3 d-flex justify-content-between mb-3">
         <div className="user-info d-flex align-items-center">
             <Image
                 src={profileImg} 

@@ -31,23 +31,23 @@ const ActiveChatInput = () => {
     setText("")
   }
   return (
-    <div className="active-chat-input p-3">
+    <div className="active-chat-input px-2 px-sm-3 py-3">
       {
         isCurrentUserBlocked ? (
-          <p className='blocked-message text-2 m-0 p-3 text-center rounded-1'>
+          <p className='blocked-message text-2 m-0 p-2 p-sm-3 text-center rounded-1'>
             You cannot reply to this conversation.
           </p>
         ): isReceiverBlocked?(
-          <p className='blocked-message text-2 m-0 p-3 text-center rounded-1'>
+          <p className='blocked-message text-2 m-0 p-2 p-sm-3 text-center rounded-1'>
             You have blocked this user.
           </p>
         ):(
           <Form className='d-flex gap-3' onSubmit={handleSend}>
-            <InputGroup controlId="form-group-id" className='w-100'>
+            <InputGroup className='w-100'>
               <Form.Control 
                 type="text" 
                 placeholder="Type Your Message Here..." 
-                className='p-3 fs-6 border-0 input-1'
+                className='p-2 p-sm-3 fs-6 border-0 input-1'
                 value={text}
                 onChange={handleChange}
                 aria-describedby="basic-addon1"
@@ -57,7 +57,7 @@ const ActiveChatInput = () => {
               </InputGroup.Text>
               <EmojiPicker open={open} onEmojiClick={handleEmoji} />
             </InputGroup>
-            <Button className='rounded-circle px-3 fs-5'>
+            <Button className='rounded-circle px-sm-3 fs-5 btn-1 border-0' type='submit'>
               <i class="bi bi-send-fill"></i>
             </Button>
           </Form>)

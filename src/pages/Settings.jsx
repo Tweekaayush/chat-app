@@ -1,12 +1,11 @@
-import {useState, useEffect} from 'react'
-import {Row, Col, Button, Tab, Tabs, Nav} from 'react-bootstrap'
+import {useEffect} from 'react'
+import {Row, Col, Button, Tab, Nav} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import ProfileSettings from '../components/ProfileSettings'
 
 const Settings = () => {
 
   const navigate = useNavigate()
-  const [currentSettings, setCurrentSettings] = useState(0)
 
   useEffect(()=>{
     document.title = 'ChatApp | Settings'
@@ -16,7 +15,7 @@ const Settings = () => {
     <>
       <Row
         style={{height: '8vh'}} 
-        className='settings-header p-3 m-0 position-relative w-100'
+        className='settings-header p-2 p-sm-3 m-0 position-relative w-100'
       >
         <Col className='d-flex align-items-center p-0'>
           <Button 
@@ -46,7 +45,7 @@ const Settings = () => {
               </Nav.Item>
             </Nav>
           </Col>
-          <Col lg={8} className='settings-content p-3 h-100'>
+          <Col lg={8} className='settings-content p-2 p-sm-3 h-100'>
             <Tab.Content className='h-100'>
                 <Tab.Pane eventKey="first" className='h-100'>
                   <ProfileSettings/>

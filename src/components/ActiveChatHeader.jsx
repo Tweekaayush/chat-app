@@ -21,7 +21,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
 
   return (
         admin===undefined?(
-            <div className='d-flex p-3 align-items-center active-chat-header'>
+            <div className='d-flex p-2 p-sm-3 align-items-center active-chat-header'>
                 <Button className='border-0 bg-transparent p-0 pe-2 fs-5' onClick={handleBack}>
                     <i class="bi bi-arrow-left"></i>
                 </Button>
@@ -33,7 +33,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
                 />
                 <div className='ps-2 flex-grow-1' onClick={handleClick}>
                     <h1 className='fs-6 text-1 m-0'>{username}</h1>
-                    <p className='m-0 text-2 fs-6'>{status}</p>
+                    <p className='m-0 text-2 fs-6 ellipses'>{status}</p>
                 </div>
                 <Button 
                     className='border-0 bg-transparent p-0 fs-5 text-danger' 
@@ -44,7 +44,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
                 </Button>
             </div>
         ):(
-            <div className='d-flex p-3 align-items-center active-chat-header'>
+            <div className='d-flex p-2 p-sm-3 align-items-center active-chat-header'>
                 <Button className='border-0 bg-transparent p-0 pe-2 fs-5' onClick={handleBack}>
                     <i class="bi bi-arrow-left"></i>
                 </Button>
@@ -56,7 +56,7 @@ const ActiveChatHeader = ({setChatInfo}) => {
                 />
                 <div className='px-2 flex-grow-1' onClick={handleClick}>
                     <h1 className='fs-6 text-1 m-0'>{groupName}</h1>
-                    <p className='m-0 text-2 fs-6'>Tap to see group info!</p>
+                    <p className='m-0 text-2 fs-6 ellipses'>Tap to see group info!</p>
                 </div>
             </div>
         )

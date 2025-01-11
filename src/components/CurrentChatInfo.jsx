@@ -11,10 +11,10 @@ const CurrentChatInfo = ({setChatInfo}) => {
 
   return (
     <Container fluid className='d-flex flex-column p-0 h-100 w-100'>
-      <Button className='border-0 bg-transparent px-3 pt-3 fs-5 align-self-start' onClick={()=>setChatInfo(false)}>
+      <Button className='border-0 bg-transparent px-2 px-sm-3 pt-2 pt-sm-3 fs-5 align-self-start' onClick={()=>setChatInfo(false)}>
         <i class="bi bi-arrow-left"></i>
       </Button>
-      <div className='d-flex flex-column align-items-center p-3' style={{borderBottom: '1px solid gray'}}>
+      <div className='d-flex flex-column align-items-center p-2 p-sm-3' style={{borderBottom: '1px solid gray'}}>
         <Image 
           src={admin?groupImg:profileImg} 
           alt={admin?groupName:username}
@@ -26,9 +26,9 @@ const CurrentChatInfo = ({setChatInfo}) => {
         {status && <p className='fs-6 text-2 text-center m-0'>{status}</p>}
       </div>
       <div className='d-flex flex-column h-100'>
-        <h3 className='text-1 fs-6 p-3'>
+        <h5 className='text-1 fs-6 p-2 p-sm-3'>
           {admin?'Members':`You have ${commonGroups.length} Group(s) in common.`}
-        </h3>
+        </h5>
         <ListGroup
           className='overflow-y-auto h-100'
         > 
@@ -37,7 +37,7 @@ const CurrentChatInfo = ({setChatInfo}) => {
             [data, ...members]?.map((member)=>{
               return <ListGroup.Item 
                         key={member.uid} 
-                        className='d-flex bg-transparent p-3'
+                        className='d-flex bg-transparent px-2 px-sm-3 py-3'
                       >
                           <Image
                             src={member.profileImg} 
@@ -55,7 +55,7 @@ const CurrentChatInfo = ({setChatInfo}) => {
             commonGroups?.map((group)=>{
               return <ListGroup.Item 
                         key={group.chatId} 
-                        className='d-flex align-items-center bg-transparent p-3'
+                        className='d-flex bg-transparent px-2 px-sm-3 py-3'
                       >
                           <Image 
                             src={group.groupImg} 
@@ -72,7 +72,7 @@ const CurrentChatInfo = ({setChatInfo}) => {
         }
         </ListGroup>
       </div>
-      <div className='p-3'>
+      <div className='p-2 p-sm-3'>
         {
           admin?
           <Button 

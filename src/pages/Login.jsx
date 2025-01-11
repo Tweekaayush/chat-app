@@ -83,7 +83,7 @@ const Login = () => {
 
   return (
     <Container 
-        className='form-container p-4 rounded-1'
+        className='form-container p-2 p-sm-3 rounded-1'
         style={{maxWidth: '450px'}}
     >
         <h1 

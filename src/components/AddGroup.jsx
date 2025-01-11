@@ -7,8 +7,8 @@ const AddGroup = (props) => {
     const [userInput, setUserInput] = useState('')
     const dispatch = useDispatch()
     const [members, setMembers] = useState([])
-    const {users: userList} = useSelector(state=>state.chats.data)
-    const {data: {uid}, data} = useSelector(state=>state.user)
+    const {users: userList} = useSelector(state=>state?.chats?.data)
+    const {data: {uid}, data} = useSelector(state=>state?.user)
     const [filteredUsers, setFilteredUsers] = useState([])
     const [groupName, setGroupName] = useState('')
 
@@ -31,7 +31,7 @@ const AddGroup = (props) => {
             return flag
         }))
         setMembers(prev => [...prev, member])
-        setUserInput('')
+        if(!filteredUsers.length) setUserInput('')
     }
 
     const createGroup = (e) =>{
@@ -107,8 +107,8 @@ const AddGroup = (props) => {
                 <Form.Group controlId="form-name">
                     <div className="members mb-2 pb-1 overflow-x-auto d-flex gap-2">
                         {members.map((member)=>{
-                            return <Button 
-                                        className='d-flex gap-2 p-1 align-items-center rounded-1' 
+                            return <div 
+                                        className='d-flex gap-2 p-1 align-items-center rounded-1 btn-1 text-1' 
                                         key={member.uid}
                                     >
                                         <h3 className='m-0' style={{fontSize: '14px', whiteSpace: 'nowrap'}}>
@@ -118,7 +118,7 @@ const AddGroup = (props) => {
                                             className='p-0'
                                             onClick={()=>setMembers(members.filter((m)=>m.uid !== member.uid))}
                                         />
-                                    </Button>
+                                    </div>
                         })}
                     </div>
                     <Form.Control 
@@ -130,16 +130,16 @@ const AddGroup = (props) => {
                     <ListGroup style={{maxHeight: '150px'}} className='overflow-y-auto mt-2'>
                         {
                             filteredUsers?.map((user)=>{
-                                return <ListGroup.Item key={user.uid} className='d-flex align-items-center py-2 '>
+                                return <ListGroup.Item key={user.uid} className='d-flex align-items-center py-2 px-0'>
                                         <Image src={user.profileImg} alt={user.uid} className='profile-avatar object-fit-cover' roundedCircle/>
                                         <h6 className='px-2 m-0 w-100'>{user.username}</h6>
-                                        <Button className='' onClick={(e)=>handleAdd(e, user)}>Add</Button>
+                                        <Button className='btn-1 rounded-1 border-0 fs-6' onClick={(e)=>handleAdd(e, user)}>Add</Button>
                                 </ListGroup.Item>
                             })
                         }
                     </ListGroup>
                 </Form.Group>
-                <Button type='submit' className='mt-4'>Create Group</Button>
+                <Button type='submit' className='mt-4 btn-1 border-0 rounded-1'>Create Group</Button>
             </Form>
         </Modal.Body>
     </Modal>

@@ -60,10 +60,10 @@ export const addUser = createAsyncThunk('addUser', async(payload, {getState})=>{
 
 export const addGroupChat = createAsyncThunk('addGroupChat', async(payload, {getState})=>{
 
-    const userGroupRef = collection(db, 'groupChats')
-    const chatRef = collection(db, 'chats')
-
     try {
+        const userGroupRef = collection(db, 'groupChats')
+        const chatRef = collection(db, 'chats')
+
         const newChatRef = doc(chatRef)    
 
         await setDoc(newChatRef,{
@@ -84,6 +84,7 @@ export const addGroupChat = createAsyncThunk('addGroupChat', async(payload, {get
                 })
             })
         })
+
 
     } catch (error) {
         console.log(error) 

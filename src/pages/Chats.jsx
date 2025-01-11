@@ -16,7 +16,7 @@ const Chats = () => {
   const [addUserStatus, setAddUserStatus] = useState(false)
   const [addGroupStatus, setAddGroupStatus] = useState(false)
   const [chatInfo, setChatInfo] = useState(false)
-  const {currentChat} = useSelector(state=>state.chats.data)
+  const {currentChat} = useSelector(state=>state?.chats?.data)
   const [open, setOpen] = useState(true)
 
   
@@ -52,17 +52,17 @@ const Chats = () => {
       <AddGroup show={addGroupStatus} onHide={()=>setAddGroupStatus(false)}/>
         <Col 
           lg={4} 
-          className={`container-cl px-0 py-3 d-flex flex-column ${open?'container-cl-active':''}`}
+          className={`container-cl px-0 py-2 py-sm-3 d-flex flex-column ${open?'container-cl-active':''}`}
 
         >
           <UserInfoHeader />
           <SearchUsers setSearch={setSearch} search={search}/>
           <ChatList search={search} setOpen={setOpen}/>
-          <div className="btn-groups px-3 d-flex justify-content-end gap-2">
-            <Button className='fs-4 py-1 px-2 border-0' onClick={()=>setAddUserStatus(true)}>
+          <div className="btn-groups px-2 px-sm-3 d-flex justify-content-end gap-2">
+            <Button className='fs-4 py-1 px-2 border-0 btn-1' onClick={()=>setAddUserStatus(true)}>
               <i class="bi bi-plus"></i>
             </Button>
-            <Button className='fs-4 py-1 px-2 border-0' onClick={()=>setAddGroupStatus(true)}>
+            <Button className='fs-4 py-1 px-2 border-0 btn-1' onClick={()=>setAddGroupStatus(true)}>
               <i class="bi bi-people"></i>
             </Button>
           </div>
@@ -75,7 +75,7 @@ const Chats = () => {
                 Object.keys(currentChat).length !== 0?(
                         !chatInfo?<ActiveChat setChatInfo={setChatInfo}/>: <CurrentChatInfo setChatInfo={setChatInfo}/>
                 ): (
-                    <div className='empty-chat-container d-flex justify-content-center align-items-center h-100 w-100'>
+                    <div className='empty-chat-container d-flex justify-content-center align-items-center h-100 w-100 p-2 p-sm-3'>
                         <h1 className='fs-4 text-center text-2'>Select a chat to start a conversation.</h1>
                     </div>
                 )

@@ -13,12 +13,13 @@ const ActiveChat = ({setChatInfo}) => {
   return (
     <Container fluid={true} className='p-0 d-flex flex-column h-100'>
       <ActiveChatHeader setChatInfo={setChatInfo}/>
-      <Container className='overflow-y-auto h-100 d-flex flex-column p-3' fluid>
+      <Container className='overflow-y-auto h-100 d-flex flex-column p-2 p-sm-3' fluid>
         {
           messages?.map((message)=>{
             return admin===undefined?(
               <div 
                 className={`message d-flex align-items-end mb-4 ${message.senderId === uid?'flex-row-reverse owner':''}`}
+                key={message?.createdAt?.seconds}
               >
                 <Image 
                   src={message.senderId === uid?profileImg:receiverImg} 
@@ -26,7 +27,7 @@ const ActiveChat = ({setChatInfo}) => {
                   roundedCircle
                 />
                 <div className="text-box px-2 mw-100 text-break">
-                  <p className="text fs-6 text-1 p-3 m-0">
+                  <p className="text fs-6 text-1 px-3 py-2 m-0">
                     {
                       message?.text
                     }
@@ -48,7 +49,7 @@ const ActiveChat = ({setChatInfo}) => {
                   roundedCircle
                 />
                 <div className="text-box px-2 mw-100 text-break">
-                  <p className="text fs-6 text-1 p-3 m-0 d-flex flex-column">
+                  <p className="text fs-6 text-1 px-3 py-2 m-0 d-flex flex-column">
                     <span className='fw-bolder mb-2'>{message.username}</span>
                     {
                       message?.text

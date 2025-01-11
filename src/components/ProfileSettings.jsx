@@ -42,7 +42,7 @@ const ProfileSettings = () => {
                     type="text" 
                     value={formData.name} 
                     onChange={handleChange} 
-                    className='fs-6 py-3 border-0 rounded-1 input-1'
+                    className='fs-6 py-2 py-sm-3 border-0 rounded-1 input-1'
                 />
             </Form.Group>
             <Form.Group controlId="form-status" className='mb-3'>
@@ -52,10 +52,10 @@ const ProfileSettings = () => {
                     type="text" 
                     value={formData.status} 
                     onChange={handleChange} 
-                    className='fs-6 py-3 border-0 rounded-1 input-1'
+                    className='fs-6 py-2 py-sm-3 border-0 rounded-1 input-1'
                 />
             </Form.Group>
-            <Button type='submit' className='fs-6 px-4 py-3 align-self-end text-1'>Save Changes</Button>
+            <Button type='submit' className='fs-6 px-3 py-2 px-sm-4 py-sm-3 align-self-end text-1 btn-1 border-0 rounded-1'>Save Changes</Button>
         </Form>
     </>
   )

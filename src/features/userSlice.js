@@ -30,6 +30,9 @@ export const getUserDetails = createAsyncThunk('getUserDetails', async(payload, 
         await setDoc(doc(collection(db, 'userChats'), payload.uid),{
             chats: []
         })
+        await setDoc(doc(collection(db, 'groupChats'), payload.uid),{
+            chats: []
+        })
     }
 
     return {
