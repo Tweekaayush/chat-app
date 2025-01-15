@@ -45,7 +45,7 @@ const App = () => {
           <Container 
             fluid
             className='h-100 d-flex justify-content-center align-items-center p-0 flex-column overflow-hidden'
-            style={{maxWidth: '1024px', height: '70vh'}}
+            style={{maxWidth: '1024px'}}
           >
             <Routes>
               <Route exact path='/login' element={<Login/>}/>

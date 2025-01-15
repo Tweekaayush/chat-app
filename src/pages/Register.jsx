@@ -162,7 +162,7 @@ const Register = () => {
             </Form.Group>
             <Button 
                 type='submit'
-                className='w-100 mb-1 mt-2 fs-5 p-2 rounded-1'
+                className='w-100 mb-1 mt-2 fs-5 p-2 rounded-1 btn-1 border-0'
             >
                 Login
             </Button>
