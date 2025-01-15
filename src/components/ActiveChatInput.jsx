@@ -52,12 +52,12 @@ const ActiveChatInput = () => {
                 onChange={handleChange}
                 aria-describedby="basic-addon1"
               />
-              <InputGroup.Text id="basic-addon1" onClick={()=>setOpen(prev=>!prev)} className='border-0 emoji-picker'>
+              <InputGroup.Text id="basic-addon1" onClick={()=>setOpen(prev=>!prev)} className='border-0 emoji-picker text-1'>
                 <i class="bi bi-emoji-smile"></i>
               </InputGroup.Text>
               <EmojiPicker open={open} onEmojiClick={handleEmoji}/>
             </InputGroup>
-            <Button className='rounded-circle px-sm-3 fs-5 btn-1 border-0 shadow' type='submit'>
+            <Button className='rounded-circle px-sm-3 fs-5 btn-1 border-0 shadow text-1' type='submit'>
               <i class="bi bi-send-fill"></i>
             </Button>
           </Form>)

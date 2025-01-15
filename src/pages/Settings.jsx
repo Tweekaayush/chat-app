@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {Row, Col, Button, Tab, Nav} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import ProfileSettings from '../components/ProfileSettings'
+import AppSettings from '../components/AppSettings'
 
 const Settings = () => {
 
@@ -15,11 +16,11 @@ const Settings = () => {
     <>
       <Row
         style={{height: '8vh'}} 
-        className='settings-header p-2 p-sm-3 m-0 position-relative w-100'
+        className='settings-header p-2 p-sm-3 m-0 position-relative w-100 rounded-top'
       >
         <Col className='d-flex align-items-center p-0'>
           <Button 
-            className='border-0 bg-transparent p-0 pe-3 fs-5' 
+            className='border-0 bg-transparent p-0 pe-3 fs-5 text-1' 
             onClick={()=>navigate('/')}
           >
             <i class="bi bi-arrow-left"></i>
@@ -33,7 +34,7 @@ const Settings = () => {
       <Tab.Container defaultActiveKey="first">
         <Row
           style={{height: '62vh'}} 
-          className='container-c p-0 m-0 position-relative w-100'
+          className='container-c p-0 m-0 position-relative w-100 rounded-bottom overflow-hidden'
         > 
           <Col lg={4} className='settings-nav p-0 pb-lg-3'>
             <Nav variant="pills" className="flex-lg-column">
@@ -50,7 +51,9 @@ const Settings = () => {
                 <Tab.Pane eventKey="first" className='h-100'>
                   <ProfileSettings/>
                 </Tab.Pane>
-                <Tab.Pane eventKey="second" className='h-100'>Second tab content</Tab.Pane>
+                <Tab.Pane eventKey="second" className='h-100'>
+                  <AppSettings/>
+                </Tab.Pane>
               </Tab.Content>
           </Col>
         </Row>

@@ -35,7 +35,7 @@ const UserInfoHeader = () => {
             </h5>
         </div>
         <Dropdown>
-            <Dropdown.Toggle id="dropdown-basic" className='bg-dark border-0'>
+            <Dropdown.Toggle id="dropdown-basic" className='bg-dark border-0 fs-5 p-0 bg-transparent text-1'>
 
             </Dropdown.Toggle>
 

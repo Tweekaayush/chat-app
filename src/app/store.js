@@ -1,12 +1,12 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit'
 import userReducer from '../features/userSlice'
 import chatsReducer from '../features/chatsSlice'
-// import themeReducer from '../features/themeSlice'
+import themeReducer from '../features/themeSlice'
 
 const rootReducer = combineReducers({
     user: userReducer,
     chats: chatsReducer,
-    // theme: themeReducer
+    theme: themeReducer
 })
 
 const store = configureStore({

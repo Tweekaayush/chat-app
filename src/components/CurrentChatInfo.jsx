@@ -11,7 +11,7 @@ const CurrentChatInfo = ({setChatInfo}) => {
 
   return (
     <Container fluid className='d-flex flex-column p-0 h-100 w-100'>
-      <Button className='border-0 bg-transparent px-2 px-sm-3 pt-2 pt-sm-3 fs-5 align-self-start' onClick={()=>setChatInfo(false)}>
+      <Button className='border-0 bg-transparent px-2 px-sm-3 pt-2 pt-sm-3 fs-5 align-self-start text-1' onClick={()=>setChatInfo(false)}>
         <i class="bi bi-arrow-left"></i>
       </Button>
       <div className='d-flex flex-column align-items-center p-2 p-sm-3' style={{borderBottom: '1px solid gray'}}>

@@ -52,24 +52,24 @@ const Chats = () => {
       <AddGroup show={addGroupStatus} onHide={()=>setAddGroupStatus(false)}/>
         <Col 
           lg={4} 
-          className={`container-cl px-0 py-2 py-sm-3 d-flex flex-column ${open?'container-cl-active':''}`}
+          className={`container-cl px-0 py-2 py-sm-3 d-flex flex-column rounded-start ${open?'container-cl-active':''}`}
 
         >
           <UserInfoHeader />
           <SearchUsers setSearch={setSearch} search={search}/>
           <ChatList search={search} setOpen={setOpen}/>
           <div className="btn-groups px-2 px-sm-3 d-flex justify-content-end gap-2">
-            <Button className='fs-4 py-1 px-2 border-0 btn-1' onClick={()=>setAddUserStatus(true)}>
+            <Button className='fs-4 py-1 px-2 border-0 btn-1 text-1' onClick={()=>setAddUserStatus(true)}>
               <i class="bi bi-plus"></i>
             </Button>
-            <Button className='fs-4 py-1 px-2 border-0 btn-1' onClick={()=>setAddGroupStatus(true)}>
+            <Button className='fs-4 py-1 px-2 border-0 btn-1 text-1' onClick={()=>setAddGroupStatus(true)}>
               <i class="bi bi-people"></i>
             </Button>
           </div>
         </Col>
         <Col 
           lg={8} 
-          className='container-cr p-0 h-100'
+          className='container-cr p-0 h-100 rounded-end'
         >
           {
                 Object.keys(currentChat).length !== 0?(

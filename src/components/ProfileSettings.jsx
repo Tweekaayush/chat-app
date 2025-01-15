@@ -31,7 +31,7 @@ const ProfileSettings = () => {
 
   return (
     <>
-        <div className="profile-setting-header mb-3">
+        <div className="mb-3">
             <h2 className='fs-3 text-1'>Edit Profile</h2>
         </div>
         <Form onSubmit={handleSubmit} className='d-flex flex-column'>

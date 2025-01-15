@@ -7,27 +7,78 @@
 }
 
 :root{
+  --body-background: #0e0e0e;
+}
+
+[data-theme='carbon']{
   --bg-color-1: #1F1F22;
   --bg-color-2: #1A1A1E;
   --bg-color-3: #26272D;
   --bg-color-4: rgba(126,18,241,1);
   --bg-color-5: rgba(238,29,232,1); 
-  --bg-color-6: #0e0e0e;
   --text-color-1: rgb(230, 230, 230);
   --text-color-2: rgb(119, 119, 119);
   --text-color-3: rgb(209, 209, 209);
   --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
 }
 
+[data-theme='coffee']{
+  --bg-color-1: #553939;
+  --bg-color-2: #3B3030;
+  --bg-color-3: #704F4F;
+  --bg-color-4: #c9731e;
+  --bg-color-5: #e7910f;
+  --text-color-1: rgb(230, 230, 230);
+  --text-color-2: rgb(165, 165, 165);
+  --text-color-3: rgb(209, 209, 209);
+  --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
+}
+
+[data-theme='midnight']{
+  --bg-color-1: #2E236C;
+  --bg-color-2: #17153B;
+  --bg-color-3: #433D8B;
+  --bg-color-4: #c9731e;
+  --bg-color-5: #e7910f;
+  --text-color-1: rgb(230, 230, 230);
+  --text-color-2: rgb(165, 165, 165);
+  --text-color-3: rgb(209, 209, 209);
+  --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
+}
+
 [data-theme='forest']{
-  --bg-color-1: #1F1F22;
-  --bg-color-2: #1A1A1E;
-  --bg-color-3: #26272D;
-  --bg-color-4: rgba(126,18,241,1);
-  --bg-color-5: rgba(238,29,232,1); 
-  --bg-color-6: #0e0e0e;
-  --text-color-1: rgb(255, 255, 255);
-  --text-color-2: rgb(119, 119, 119);
+  --bg-color-1: #47663B;
+  --bg-color-2: #1F4529;
+  --bg-color-3: #6e8b70;
+  --bg-color-4: #6F4E37;
+  --bg-color-5: #493628;
+  --text-color-1: rgb(240, 240, 240);
+  --text-color-2: rgb(209, 209, 209);
+  --text-color-3: rgb(230, 230, 230);
+  --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
+}
+
+[data-theme='sunset']{
+  --bg-color-1: #9e264e;
+  --bg-color-2: #6b2267;
+  --bg-color-3: #ca692d;
+  --bg-color-4: #c98f09;
+  --bg-color-5: #ad232a;
+  --text-color-1: rgb(240, 240, 240);
+  --text-color-2: rgb(209, 209, 209);
+  --text-color-3: rgb(230, 230, 230);
+  --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
+}
+
+[data-theme='vanilla']{
+  --bg-color-1: #F8FAFC;
+  --bg-color-2: #BCCCDC;
+  --bg-color-3: #D9EAFD;
+  --bg-color-4: #daaffd;
+  --bg-color-5: #ed96ff;
+  --text-color-1: rgb(0, 0, 0);
+  --text-color-2: rgb(88, 88, 88);
+  --text-color-3: rgb(34, 34, 34);
   --button-color-1: linear-gradient(90deg, var(--bg-color-4) 45%, var(--bg-color-5) 100%);
 }
 
@@ -49,8 +100,9 @@
 }
 
 body{
-  background-color: var(--bg-color-6) !important;
+  background-color: var(--body-background) !important;
   font-family: "Kanit", serif;
+  background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
 }
 
 
@@ -61,6 +113,7 @@ body{
 .text-2{
   color: var(--text-color-2) !important;
 }
+
 .text-3{
   color: var(--text-color-3) !important;
 }
@@ -139,7 +192,7 @@ body{
 }
 
 .emoji-picker{
-  background-color: var(--bg-color-3);
+  background-color: var(--bg-color-3) !important;
 }
 
 .blocked-message{
@@ -182,6 +235,14 @@ aside{
 
 .nav-pills .active{
   background-color: var(--bg-color-2) !important;
+}
+
+.theme-btn{
+  border: 1px solid var(--text-color-2);
+}
+
+.theme-active{
+  border-color: var(--text-color-1);
 }
 
 
