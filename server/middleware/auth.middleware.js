@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async.middleware");
-// const User = require("../models/user.model");
+const User = require("../models/user.model");
 
 exports.protected = asyncHandler(async (req, res, next) => {
   const { token } = req.cookies;
@@ -10,7 +10,7 @@ exports.protected = asyncHandler(async (req, res, next) => {
   }
 
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-  //   req.user = await User.findById(decodedData._id).select("-password");
+  req.user = await User.findById(decodedData._id).select("-password");
 
   next();
 });
