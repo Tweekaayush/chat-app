@@ -11,12 +11,9 @@ const ChatListItem = ({ chat, user }) => {
       className="flex items-center px-2 py-4 cursor-pointer hover:bg-primary/10"
       onClick={() => navigate(`/chat/${chat._id}`)}
     >
-      <div className="relative w-9 mr-4">
-        <img
-          src={avatar}
-          alt={name}
-          className="w-full aspect-square rounded-full"
-        />
+      <div className="user-icon mr-4">
+        <img src={avatar} alt={name} />
+        {!chat?.isGroup && <span></span>}
       </div>
       <div>
         <h3 className="text-base text-black dark:text-white">{name}</h3>
