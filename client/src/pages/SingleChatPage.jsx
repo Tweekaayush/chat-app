@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getChatById, sendMessage } from "../features/chat.slice";
+import ChatHeader from "../components/ChatHeader";
 // import ChatHeader from "../components/ChatHeader";
 // import ChatInput from "../components/ChatInput";
 // import Message from "../components/Message";
 
 const SingleChatPage = () => {
-    const { chatId } = useParams();
+  const { chatId } = useParams();
   const dispatch = useDispatch();
   const [newMessageInfo, setNewMessageInfo] = useState({
     content: "",
@@ -47,7 +48,11 @@ const SingleChatPage = () => {
       dispatch(getChatById(chatId));
     }
   }, [chatId]);
-  return <div>SingleChatPage</div>;
+  return (
+    <div>
+      <ChatHeader singleChat={singleChat} user={_id}/>
+    </div>
+  );
 };
 
 export default SingleChatPage;
