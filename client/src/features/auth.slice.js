@@ -57,7 +57,7 @@ export const logout = createAsyncThunk(
         }
       );
 
-        dispatch(clearChatState());
+      dispatch(clearChatState());
 
       return res.data;
     } catch (error) {
