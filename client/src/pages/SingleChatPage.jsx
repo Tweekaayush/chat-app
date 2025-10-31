@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getChatById, sendMessage } from "../features/chat.slice";
 import ChatHeader from "../components/ChatHeader";
-// import ChatHeader from "../components/ChatHeader";
-// import ChatInput from "../components/ChatInput";
+import ChatInput from "../components/ChatInput";
 // import Message from "../components/Message";
 
 const SingleChatPage = () => {
@@ -49,8 +48,16 @@ const SingleChatPage = () => {
     }
   }, [chatId]);
   return (
-    <div>
-      <ChatHeader singleChat={singleChat} user={_id}/>
+    <div className="h-full flex flex-col">
+      <ChatHeader singleChat={singleChat} user={_id} />
+      <div className="h-full flex-col overflow-y-auto p-4"></div>
+      <ChatInput
+        send={send}
+        replyMessage={newMessageInfo.replyToMessage}
+        isGroup={singleChat.isGroup}
+        content={setNewMessageInfo.content}
+        setNewMessageInfo={setNewMessageInfo}
+      />
     </div>
   );
 };
