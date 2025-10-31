@@ -22,7 +22,10 @@ const ChatList = () => {
           <h2 className="text-xl font-medium text-black dark:text-white">
             Chat
           </h2>
-          <SquarePen className="w-5 h-5 text-gray-500 dark:text-gray-400 cursor-pointer" />
+          <SquarePen
+            onClick={()=>dispatch(setModal(true))}
+            className="w-5 h-5 text-gray-500 dark:text-gray-400 cursor-pointer"
+          />
         </div>
         <div className="relative">
           <input
