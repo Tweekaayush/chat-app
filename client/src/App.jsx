@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthLayout from "./layout/AuthLayout";
 import ChatLayout from "./layout/ChatLayout";
 import PrivateRoute from "./routes/PrivateRoute";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import { useDispatch } from "react-redux";
+import { loadUser } from "./features/auth.slice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
   return (
     <Routes>
       <Route element={<AuthLayout />}>

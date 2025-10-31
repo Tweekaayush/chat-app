@@ -71,7 +71,7 @@ export const loadUser = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/auth/me`,
+        `${import.meta.env.VITE_SERVER_URL}/user/me`,
         { withCredentials: true }
       );
       return res.data;
