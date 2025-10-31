@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./features/auth.slice";
+import ChatPage from "./pages/ChatPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const App = () => {
       </Route>
       <Route element={<PrivateRoute />}>
         <Route element={<ChatLayout />}>
-          <Route path="/chat" element={<></>} />
+          <Route path="/chat" element={<ChatPage/>} />
           <Route path="/chat/:id" element={<></>} />
         </Route>
       </Route>

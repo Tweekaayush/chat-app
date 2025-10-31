@@ -10,7 +10,7 @@
 
 @layer base {
   body {
-    @apply relative font-saira;
+    @apply relative font-saira bg-white dark:bg-gray-900;
   }
 }
 
