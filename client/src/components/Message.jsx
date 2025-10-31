@@ -1,6 +1,6 @@
 import { Reply } from "lucide-react";
 import React from "react";
-// import ReplyMessage from "./ReplyMessage";
+import ReplyMessage from "./ReplyMessage";
 
 const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
   const time = new Date(message.createdAt);
@@ -19,29 +19,29 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
         } px-4 py-2 rounded-md`}
       >
         {incomingMsg && singleChat?.isGroup && (
-          <h4 className="text-base font-semibold text-black dark:text-white">
+          <h4 className="text-base font-semibold text-black dark:text-white text-left">
             {message?.sender?.name}
           </h4>
         )}
-        {/* {message?.replyTo?._id && (
+        {message?.replyTo?._id && (
           <ReplyMessage
             replyMessage={message?.replyTo}
             isGroup={singleChat?.isGroup}
             message={message}
             user={user}
           />
-        )} */}
+        )}
         <p
           className={`${
-            !incomingMsg ? "text-white" : "text-black dark:text-white"
+            !incomingMsg ? "text-white text-right" : "text-black dark:text-white"
           } text-base mt-2`}
         >
           {message?.content}
         </p>
         <span
           className={`${
-            !incomingMsg ? "text-gray-100" : "text-gray-700 dark:text-gray-300"
-          } text-xs text-right block`}
+            !incomingMsg ? "text-gray-300" : "text-gray-700 dark:text-gray-300"
+          } text-[10px] text-right block`}
         >
           {hour}:{min}
         </span>

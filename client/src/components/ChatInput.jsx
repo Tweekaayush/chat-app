@@ -1,6 +1,6 @@
 import { Paperclip, Send, X } from "lucide-react";
 import React from "react";
-// import ReplyMessage from "./ReplyMessage";
+import ReplyMessage from "./ReplyMessage";
 
 const ChatInput = ({
   send,
@@ -11,7 +11,7 @@ const ChatInput = ({
 }) => {
   return (
     <>
-      {/* {replyMessage?._id && (
+      {replyMessage?._id && (
         <div className="border-t border-gray-300 dark:border-gray-700 p-4">
           <ReplyMessage
             replyMessage={replyMessage}
@@ -20,7 +20,7 @@ const ChatInput = ({
             isGroup={isGroup}
           />
         </div>
-      )} */}
+      )}
       <div className="p-4 border-t border-gray-300 dark:border-gray-700">
         <form onSubmit={send} className="flex gap-4">
           <button className="px-4 py-2  rounded-full border border-gray-300 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-primary">
