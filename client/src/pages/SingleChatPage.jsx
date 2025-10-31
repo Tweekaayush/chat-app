@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getChatById, sendMessage } from "../features/chat.slice";
 import ChatHeader from "../components/ChatHeader";
 import ChatInput from "../components/ChatInput";
+import Message from "../components/Message";
 // import Message from "../components/Message";
 
 const SingleChatPage = () => {
@@ -50,7 +51,27 @@ const SingleChatPage = () => {
   return (
     <div className="h-full flex flex-col">
       <ChatHeader singleChat={singleChat} user={_id} />
-      <div className="h-full flex-col overflow-y-auto p-4"></div>
+      <div className="h-full flex flex-col overflow-y-auto p-4">
+        {messages?.length ? (
+          messages?.map((message) => {
+            return (
+              <Message
+                key={message?._id}
+                singleChat={singleChat}
+                message={message}
+                user={_id}
+                setNewMessageInfo={setNewMessageInfo}
+              />
+            );
+          })
+        ) : (
+          <div className="h-full w-full flex items-center justify-center">
+            <p className="text-base text-gray-600 dark:text-gray-400">
+              Type a message to start the conversation
+            </p>
+          </div>
+        )}
+      </div>
       <ChatInput
         send={send}
         replyMessage={newMessageInfo.replyToMessage}

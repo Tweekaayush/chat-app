@@ -1,0 +1,70 @@
+import { Reply } from "lucide-react";
+import React from "react";
+// import ReplyMessage from "./ReplyMessage";
+
+const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
+  const time = new Date(message.createdAt);
+  const hour = time.getHours();
+  const min = time.getMinutes();
+  const incomingMsg = message?.sender?._id !== user;
+  return (
+    <div
+      className={`${
+        incomingMsg ? "self-start" : "self-end"
+      } w-fit grid-cols-12 first:mt-auto mb-4 cursor-pointer group flex`}
+    >
+      <div
+        className={`${
+          !incomingMsg ? "bg-primary" : "bg-gray-100 dark:bg-white/10"
+        } px-4 py-2 rounded-md`}
+      >
+        {incomingMsg && singleChat?.isGroup && (
+          <h4 className="text-base font-semibold text-black dark:text-white">
+            {message?.sender?.name}
+          </h4>
+        )}
+        {/* {message?.replyTo?._id && (
+          <ReplyMessage
+            replyMessage={message?.replyTo}
+            isGroup={singleChat?.isGroup}
+            message={message}
+            user={user}
+          />
+        )} */}
+        <p
+          className={`${
+            !incomingMsg ? "text-white" : "text-black dark:text-white"
+          } text-base mt-2`}
+        >
+          {message?.content}
+        </p>
+        <span
+          className={`${
+            !incomingMsg ? "text-gray-100" : "text-gray-700 dark:text-gray-300"
+          } text-xs text-right block`}
+        >
+          {hour}:{min}
+        </span>
+      </div>
+      {incomingMsg && (
+        <div
+          className="hidden group-hover:flex items-center justify-center"
+          onClick={() =>
+            setNewMessageInfo((prev) => {
+              return {
+                ...prev,
+                replyToMessage: message,
+              };
+            })
+          }
+        >
+          <div className="rounded-full bg-gray-100 dark:bg-white/3 p-2 ml-4">
+            <Reply className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Message;
