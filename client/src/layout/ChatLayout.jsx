@@ -17,7 +17,7 @@ const ChatLayout = () => {
   useEffect(() => {
     dispatch(getChats());
   }, []);
-  
+
   return (
     <AppWrapper>
       <div
@@ -31,7 +31,9 @@ const ChatLayout = () => {
         className={`${
           !chatId ? "hidden lg:block" : "block"
         } h-screen col-span-12 lg:col-span-9`}
-      ></div>
+      >
+        <Outlet />
+      </div>
     </AppWrapper>
   );
 };
