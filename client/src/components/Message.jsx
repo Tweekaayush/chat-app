@@ -11,7 +11,7 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
     <div
       className={`${
         incomingMsg ? "self-start" : "self-end"
-      } w-fit grid-cols-12 first:mt-auto mb-4 cursor-pointer group flex`}
+      } w-fit grid-cols-12 last:mt-auto mb-4 cursor-pointer group flex`}
     >
       <div
         className={`${

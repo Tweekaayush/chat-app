@@ -51,7 +51,7 @@ const SingleChatPage = () => {
   return (
     <div className="h-full flex flex-col">
       <ChatHeader singleChat={singleChat} user={_id} />
-      <div className="h-full flex flex-col overflow-y-auto p-4">
+      <div className="h-full flex flex-col-reverse overflow-y-auto p-4">
         {messages?.length ? (
           messages?.map((message) => {
             return (
