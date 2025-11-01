@@ -15,9 +15,9 @@ const ChatListItem = ({ chat, user }) => {
         <img src={avatar} alt={name} />
         {!chat?.isGroup && <span></span>}
       </div>
-      <div>
-        <h3 className="text-base text-black dark:text-white">{name}</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+      <div className="flex flex-col flex-1">
+        <h3 className="text-base text-black dark:text-white ellipses">{name}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 ellipses">
           {lastMessage}
         </p>
       </div>

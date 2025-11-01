@@ -37,7 +37,7 @@ const ReplyMessage = ({
         <p
           className={`${
             update
-              ? "text-gray-800 dark:text-gray-200"
+              ? "text-gray-800 dark:text-gray-200 ellipses"
               : incomingMsg
               ? "text-white text-right"
               : "text-gray-800 dark:text-gray-200 text-left"

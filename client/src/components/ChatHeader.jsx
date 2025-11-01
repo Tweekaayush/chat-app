@@ -23,8 +23,8 @@ const ChatHeader = ({ singleChat, user }) => {
           className="w-full aspect-square rounded-full"
         />
       </div>
-      <div>
-        <h3 className="text-base text-black dark:text-white">{name}</h3>
+      <div className="flex flex-col flex-1">
+        <h3 className="text-base text-black dark:text-white ellipses">{name}</h3>
         {isGroup && (
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {singleChat?.participants?.length} Members

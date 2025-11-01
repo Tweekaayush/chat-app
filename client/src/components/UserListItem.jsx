@@ -14,9 +14,9 @@ const UserListItem = ({avatar, name, about, handleClick, member=false}) => {
       <div className="user-icon mr-4">
         <img src={avatar} alt={name} />
       </div>
-      <div>
-        <h3 className="text-base text-black dark:text-white">{name}</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+      <div className='flex flex-col flex-1'>
+        <h3 className="text-base text-black dark:text-white ellipses">{name}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 ellipses">
           {about}
         </p>
       </div>

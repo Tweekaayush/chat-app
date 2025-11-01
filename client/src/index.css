@@ -15,12 +15,21 @@
 }
 
 @layer utilities {
+  .ellipses {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
   .user-icon {
     @apply w-8 h-8 relative;
   }
 
   .user-icon img {
-    @apply w-full h-full rounded-full;
+    @apply w-full h-full rounded-full object-cover;
   }
 
   .user-icon span {
