@@ -14,7 +14,7 @@ const ChatHeader = ({ singleChat, user }) => {
     <div className="border-b border-gray-300 dark:border-gray-700 p-4 flex items-center">
       <ArrowLeft
         className="text-gray-700 dark:text-gray-300 mr-4 block lg:hidden cursor-pointer"
-        onClick={() => [navigate("/chat"), dispatch(clearSingleChat())]}
+        onClick={() => navigate("/chat")}
       />
       <div className="relative w-9 mr-4">
         <img

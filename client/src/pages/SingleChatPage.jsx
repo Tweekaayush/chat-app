@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getChatById, sendMessage } from "../features/chat.slice";
+import { clearSingleChat, getChatById, sendMessage } from "../features/chat.slice";
 import ChatHeader from "../components/ChatHeader";
 import ChatInput from "../components/ChatInput";
 import Message from "../components/Message";
@@ -47,6 +47,7 @@ const SingleChatPage = () => {
     if (chatId) {
       dispatch(getChatById(chatId));
     }
+    return ()=>dispatch(clearSingleChat())
   }, [chatId]);
   return (
     <div className="h-full flex flex-col">

@@ -60,7 +60,7 @@ const Sidebar = () => {
             <div className={`${open?'visible opacity-100':'invisible opacity-0'} gap-4 absolute top-0 left-0 ml-8 pl-4 flex transition-all duration-300 ease-in-out`}>
               <button
                 className="nav-icon bg-primary/90 hover:bg-primary/80 text-white"
-                onClick={() => navigate("/settings")}
+                onClick={() => navigate("/settings/account")}
               >
                 <Settings />
               </button>
