@@ -15,7 +15,7 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
     >
       <div
         className={`${
-          !incomingMsg ? "bg-primary" : "bg-gray-100 dark:bg-white/10"
+          !incomingMsg ? "bg-primary" : "bg-gray-200/70 dark:bg-white/10"
         } px-4 py-2 rounded-md`}
       >
         {incomingMsg && singleChat?.isGroup && (

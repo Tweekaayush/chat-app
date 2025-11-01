@@ -30,7 +30,7 @@
   /* Sidebar */
 
   .nav-icon {
-    @apply rounded-full cursor-pointer bg-gray-100 hover:bg-gray-200 w-8 h-8 flex items-center justify-center;
+    @apply rounded-full cursor-pointer w-8 h-8 flex items-center justify-center;
   }
 
   .nav-icon svg {

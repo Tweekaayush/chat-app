@@ -46,7 +46,7 @@ const Sidebar = () => {
         </Link>
         <div className="flex flex-col items-center gap-4">
           <button
-            className="nav-icon"
+            className="nav-icon bg-gray-100 hover:bg-gray-200"
             title="toggle dark theme"
             onClick={handleTheme}
           >
@@ -68,12 +68,12 @@ const Sidebar = () => {
             </div>
             <div className={`${open?'flex':'hidden'} gap-2 absolute top-0 left-0 ml-8 pl-4`}>
               <button
-                className="nav-icon"
+                className="nav-icon bg-primary/90 hover:bg-primary/80 text-white"
                 onClick={() => navigate("/settings")}
               >
                 <Settings />
               </button>
-              <button className="nav-icon" onClick={() => dispatch(logout())}>
+              <button className="nav-icon bg-primary/90 hover:bg-primary/80 text-white" onClick={() => dispatch(logout())}>
                 <LogOutIcon />
               </button>
             </div>
