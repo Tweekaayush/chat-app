@@ -5,7 +5,6 @@ const Message = require("../models/message.model");
 
 exports.createChat = asyncHandler(async (req, res) => {
   const { participantId, isGroup, participants, groupName } = req.body;
-
   let chat;
   let allParticipants = [];
 
@@ -30,12 +29,10 @@ exports.createChat = asyncHandler(async (req, res) => {
         $all: allParticipants,
         $size: 2,
       },
-    })
-      .populate("participants", "name avatar")
-      .populate();
+    }).populate("participants", "name avatar");
 
     if (existingChat) {
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         chat: existingChat,
       });
@@ -47,10 +44,11 @@ exports.createChat = asyncHandler(async (req, res) => {
       });
     }
   }
+  
   const populatedChat = await chat.populate("participants", "name avatar");
 
   res.status(200).json({
-    succes: true,
+    success: true,
     chat: populatedChat,
   });
 });

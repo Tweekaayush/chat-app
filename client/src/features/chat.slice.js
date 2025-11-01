@@ -30,7 +30,7 @@ export const getChats = createAsyncThunk(
 
 export const createChat = createAsyncThunk(
   "createChat",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, dispatch }) => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/chat/create`,
@@ -39,6 +39,10 @@ export const createChat = createAsyncThunk(
           withCredentials: true,
         }
       );
+
+      dispatch(getChats());
+      dispatch(setModal(false))
+
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -116,7 +120,6 @@ const chatSlice = createSlice({
     });
     builder.addCase(createChat.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.singleChat = action.payload.chat;
     });
     builder.addCase(createChat.rejected, (state, action) => {
       state.loading = false;
