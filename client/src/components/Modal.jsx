@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../features/chat.slice";
 import SearchUsers from "./SearchUsers";
 import { ArrowBigRight } from "lucide-react";
+import CreateGroup from "./CreateGroup";
 
 const Modal = () => {
   const [open, setOpen] = useState(false);
@@ -64,7 +65,9 @@ const Modal = () => {
             </h4>
           </div>
         </div>
-        {!open ? <SearchUsers /> : <></>}
+        <div className="w-full h-[516px]">
+          {!open ? <SearchUsers /> : <CreateGroup />}
+        </div>
       </div>
     </div>
   );

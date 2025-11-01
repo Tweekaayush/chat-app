@@ -29,7 +29,7 @@ const SearchUsers = () => {
           <User />
         </div>
       </div>
-      <div className="max-w-full overflow-y-auto px-2">
+      <div className="flex-1 overflow-y-auto px-2 pb-4">
         {usersList?.map((user) => {
           return (
             <UserListItem
@@ -41,6 +41,7 @@ const SearchUsers = () => {
             />
           );
         })}
+
       </div>
     </div>
   );

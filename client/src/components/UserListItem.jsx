@@ -1,13 +1,14 @@
 import React from 'react'
 import { getChatDetails, getLastMessageText } from "../utils/chat.utils";
 import { useNavigate } from "react-router-dom";
+import { CircleCheck } from 'lucide-react';
 
-const UserListItem = ({avatar, name, about, handleClick}) => {
+const UserListItem = ({avatar, name, about, handleClick, member=false}) => {
     const navigate = useNavigate();
 
   return (
     <div
-      className="flex items-center px-2 py-4 cursor-pointer hover:bg-primary/10"
+      className="flex items-center px-2 py-4 cursor-pointer hover:bg-primary/10 relative"
       onClick={handleClick}
     >
       <div className="user-icon mr-4">
@@ -19,6 +20,7 @@ const UserListItem = ({avatar, name, about, handleClick}) => {
           {about}
         </p>
       </div>
+      {member && <CircleCheck className='w-7 h-7 ml-auto text-green-700'/>}
     </div>
   )
 }
