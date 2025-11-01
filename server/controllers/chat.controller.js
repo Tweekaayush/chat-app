@@ -67,7 +67,7 @@ exports.getUserChats = asyncHandler(async (req, res) => {
         select: "name avatar",
       },
     })
-    .sort({ upatedAt: -1 });
+    .sort({ updatedAt: -1 });
 
   res.status(200).json({
     success: true,

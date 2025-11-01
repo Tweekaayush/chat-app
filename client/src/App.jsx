@@ -12,8 +12,15 @@ import SingleChatPage from "./pages/SingleChatPage";
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(loadUser());
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
   }, []);
   return (
     <Routes>

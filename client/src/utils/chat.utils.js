@@ -23,7 +23,7 @@ export const getLastMessageText = (chat, user) => {
   if (!lastMessage) {
     return {
       lastMessage: isGroup
-        ? chat?.createdBy?.toString() === user?.toString()
+        ? chat?.createdBy?.toString() === user?._id.toString()
           ? "Group created"
           : "You were added"
         : "Send a message",
@@ -34,7 +34,7 @@ export const getLastMessageText = (chat, user) => {
   if (isGroup && lastMessage.sender) {
     return {
       lastMessage: `${
-        lastMessage?.sender?._id?.toString() === user?.toString()
+        lastMessage?.sender?._id?.toString() === user?._id?.toString()
           ? "You"
           : lastMessage?.sender?.name
       }: ${lastMessage?.content}`,

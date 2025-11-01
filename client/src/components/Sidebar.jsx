@@ -29,15 +29,6 @@ const Sidebar = () => {
       localStorage.theme = "dark";
     }
   };
-
-  useEffect(() => {
-    document.documentElement.classList.toggle(
-      "dark",
-      localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-    );
-  }, []);
   return (
     <aside className="h-screen w-12 z-99 bg-primary">
       <div className="w-full h-full flex flex-col items-center justify-between px-2 py-4">
@@ -66,7 +57,7 @@ const Sidebar = () => {
               <img src={avatar} />
               <span></span>
             </div>
-            <div className={`${open?'flex':'hidden'} gap-2 absolute top-0 left-0 ml-8 pl-4`}>
+            <div className={`${open?'visible opacity-100':'invisible opacity-0'} gap-4 absolute top-0 left-0 ml-8 pl-4 flex transition-all duration-300 ease-in-out`}>
               <button
                 className="nav-icon bg-primary/90 hover:bg-primary/80 text-white"
                 onClick={() => navigate("/settings")}
