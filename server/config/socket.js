@@ -1,24 +1,44 @@
 const { Server } = require("socket.io");
+const jwt = require("jsonwebtoken");
 
-let io;
+let io = null;
 const onlineUsers = new Map();
 
-const initializeSocket = (server) => {
+exports.initializeSocket = (server) => {
   io = new Server(server, {
+    pingTimeout: 120000,
     cors: {
-      orign: process.env.CLIENT_URL,
+      origin: process.env.CLIENT_URL,
       credentials: true,
     },
   });
 
-  io.on("connection", (socket) => {
-    console.log("User Connected", socket.id);
+  io.use(async (socket, next) => {
+    const rawCookie = socket.handshake.headers.cookie;
+    if (!rawCookie) return next(new Error("Unauthorized"));
 
-    const userId = socket.handshake.query.userId;
+    const token = rawCookie?.split("=")?.[1]?.trim();
+
+    if (!token) return next(new Error("Unauthorized"));
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!decodedToken) return next(new Error("Unauthorized"));
+
+    socket.userId = decodedToken._id;
+    next();
+  });
+
+  io.on("connection", (socket) => {
+    console.log(`User Connected`, socket.id);
+
+    const userId = socket.userId;
     if (userId) onlineUsers[userId] = socket.id;
 
-    io.emit("online:users", Array.from(onlineUsers.keys()));
+    io.emit("online:users", Array.from(Object.keys(onlineUsers)));
 
+    socket.join(`user:${userId}`);
+    
     socket.on("chat:join", (chatId) => {
       socket.join(`chat:${chatId}`);
       console.log(`User ${userId} left room chat: ${chatId}`);
@@ -42,20 +62,16 @@ function getIO() {
   return io;
 }
 
-exports.emitNewChatToParticpants = (participantIds, chat) => {
+exports.emitNewChatToParticpants = (participants, chat) => {
   const io = getIO();
-  for (const participantId of participantIds) {
-    io.to(`user:${participantId}`).emit("chat:new", chat);
+  for (const participant of participants) {
+    io.to(`user:${participant}`).emit("chat:new", chat);
   }
 };
 
 exports.emitNewMessageToChatRoom = (senderId, chatId, message) => {
   const io = getIO();
   const senderSocketId = onlineUsers.get(senderId?.toString());
-
-  console.log(senderId, "senderId");
-  console.log(senderSocketId, "sender socketid exist");
-  console.log("All online users:", Object.fromEntries(onlineUsers));
 
   if (senderSocketId) {
     io.to(`chat:${chatId}`).except(senderSocketId).emit("message:new", message);
@@ -64,17 +80,13 @@ exports.emitNewMessageToChatRoom = (senderId, chatId, message) => {
   }
 };
 
-exports.emitLastMessageToParticipants = (
-  participantIds,
-  chatId,
-  lastMessage
-) => {
+exports.emitLastMessageToParticipants = (participants, chatId, lastMessage) => {
   const io = getIO();
   const payload = { chatId, lastMessage };
 
-  for (const participantId of participantIds) {
-    io.to(`user:${participantId}`).emit("chat:update", payload);
+  console.log(participants);
+
+  for (const participant of participants) {
+    io.to(`user:${participant}`).emit("chat:update", payload);
   }
 };
-
-module.exports = { initializeSocket };

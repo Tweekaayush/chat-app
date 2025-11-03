@@ -25,7 +25,7 @@
   }
 
   .user-icon {
-    @apply w-8 h-8 relative;
+    @apply w-8 h-8 relative border border-gray-600 dark:border-gray-400 rounded-full;
   }
 
   .user-icon img {
@@ -33,7 +33,7 @@
   }
 
   .user-icon span {
-    @apply absolute bottom-0 right-0 p-0.5 rounded-full bg-white flex items-center justify-center after:bg-green-600 after:p-1 after:rounded-full;
+    @apply absolute bottom-0 right-0 p-[1px] rounded-full bg-white flex items-center justify-center after:bg-green-600 after:p-1 after:rounded-full;
   }
 
   /* Sidebar */

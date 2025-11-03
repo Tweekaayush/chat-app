@@ -1,5 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
+
+const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
 
 const initialState = {
   loading: false,
@@ -15,12 +17,9 @@ export const getChats = createAsyncThunk(
   "getChats",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/chat/all`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${BASE_URL}/chat/all`, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -32,16 +31,12 @@ export const createChat = createAsyncThunk(
   "createChat",
   async (payload, { rejectWithValue, dispatch }) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/chat/create`,
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}/chat/create`, payload, {
+        withCredentials: true,
+      });
 
       dispatch(getChats());
-      dispatch(setModal(false))
+      dispatch(setModal(false));
 
       return res.data;
     } catch (error) {
@@ -54,12 +49,9 @@ export const getChatById = createAsyncThunk(
   "getChatById",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/chat/${payload}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${BASE_URL}/chat/${payload}`, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -71,13 +63,9 @@ export const sendMessage = createAsyncThunk(
   "sendMessage",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/chat/message/send`,
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}/chat/message/send`, payload, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -89,6 +77,33 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
+    addNewMessage: (state, action) => {
+      state.data.messages = [action.payload.msg, ...state.data.messages];
+    },
+    addNewChat: (state, action) => {
+      const chats = current(state.data.chats);
+      const existingChatIndex = chats.findIndex(
+        (c) => c._id === action.payload._id
+      );
+      console.log(existingChatIndex)
+      if (existingChatIndex !== -1) {
+        state.data.chats = [
+          action.payload,
+          ...chats.filter((c) => c._id !== action.payload._id),
+        ];
+      } else {
+        state.data.chats = [action.payload, ...chats];
+      }
+    },
+    updateChatLastMessage: (state, action) => {
+      const chats = current(state.data.chats);
+      const { chatId, lastMessage } = action.payload;
+      const chat = chats.find((c) => c._id === chatId);
+      state.data.chats = [
+        { ...chat, lastMessage },
+        ...chats.filter((c) => c._id !== chatId),
+      ];
+    },
     clearSingleChat: (state, action) => {
       state.data.singleChat = {};
     },
@@ -150,6 +165,13 @@ const chatSlice = createSlice({
   },
 });
 
-export const { clearChatState, clearSingleChat, setModal } = chatSlice.actions;
+export const {
+  clearChatState,
+  clearSingleChat,
+  setModal,
+  addNewMessage,
+  updateChatLastMessage,
+  addNewChat
+} = chatSlice.actions;
 
 export default chatSlice.reducer;

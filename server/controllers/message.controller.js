@@ -2,12 +2,17 @@ const asyncHandler = require("../middleware/async.middleware");
 const cloudinary = require("cloudinary");
 const Chat = require("../models/chat.model");
 const Message = require("../models/message.model");
-const { emitNewMessageToChatRoom } = require("../config/socket");
+const {
+  emitNewMessageToChatRoom,
+  emitLastMessageToParticipants,
+} = require("../config/socket");
 
 exports.sendMessage = asyncHandler(async (req, res) => {
   const { chatId, content, media, replyToId } = req.body;
 
   const chat = await Chat.findById(chatId);
+
+  console.log(chat);
 
   if (!chat) {
     res.status(404);
@@ -61,11 +66,10 @@ exports.sendMessage = asyncHandler(async (req, res) => {
   ]);
 
   chat.lastMessage = newMessage._id;
-
   await chat.save();
 
   emitNewMessageToChatRoom(req.user._id, chatId, newMessage);
-  
+
   const allParticipantIds = chat.participants.map((id) => id.toString());
   emitLastMessageToParticipants(allParticipantIds, chatId, newMessage);
 

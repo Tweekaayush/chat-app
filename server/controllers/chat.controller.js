@@ -2,6 +2,7 @@ const asyncHandler = require("../middleware/async.middleware");
 const Chat = require("../models/chat.model");
 const User = require("../models/user.model");
 const Message = require("../models/message.model");
+const { emitNewChatToParticpants } = require("../config/socket");
 
 exports.createChat = asyncHandler(async (req, res) => {
   const { participantId, isGroup, participants, groupName } = req.body;

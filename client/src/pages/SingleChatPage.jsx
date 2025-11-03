@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { clearSingleChat, getChatById, sendMessage } from "../features/chat.slice";
+import {
+  addNewMessage,
+  clearSingleChat,
+  getChatById,
+  sendMessage,
+} from "../features/chat.slice";
 import ChatHeader from "../components/ChatHeader";
 import ChatInput from "../components/ChatInput";
 import Message from "../components/Message";
@@ -24,9 +29,7 @@ const SingleChatPage = () => {
   } = useSelector((state) => state.chat);
 
   const {
-    data: {
-      user: { _id },
-    },
+    data: { user, socket, onlineUsers },
   } = useSelector((state) => state.auth);
 
   const send = (e) => {
@@ -47,11 +50,33 @@ const SingleChatPage = () => {
     if (chatId) {
       dispatch(getChatById(chatId));
     }
-    return ()=>dispatch(clearSingleChat())
+    return () => dispatch(clearSingleChat());
   }, [chatId]);
+
+  useEffect(() => {
+    if (!chatId || !socket) return;
+    socket.emit("chat:join", chatId);
+    return () => {
+      socket.emit("chat:leave", chatId);
+    };
+  }, [chatId, socket]);
+
+  useEffect(() => {
+    if (!chatId) return;
+    if (!socket) return;
+
+    const handleNewMessage = (msg) => {
+      dispatch(addNewMessage({ chatId, msg }));
+    };
+
+    socket.on("message:new", handleNewMessage);
+    return () => {
+      socket.off("message:new", handleNewMessage);
+    };
+  }, [socket, chatId, addNewMessage]);
   return (
     <div className="h-full flex flex-col">
-      <ChatHeader singleChat={singleChat} user={_id} />
+      <ChatHeader singleChat={singleChat} user={user} onlineUsers={onlineUsers}/>
       <div className="h-full flex flex-col-reverse overflow-y-auto p-4">
         {messages?.length ? (
           messages?.map((message) => {
@@ -60,7 +85,7 @@ const SingleChatPage = () => {
                 key={message?._id}
                 singleChat={singleChat}
                 message={message}
-                user={_id}
+                user={user._id}
                 setNewMessageInfo={setNewMessageInfo}
               />
             );

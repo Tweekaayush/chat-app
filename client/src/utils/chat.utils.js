@@ -1,12 +1,14 @@
-export const getChatDetails = (chat, user) => {
+export const getChatDetails = (chat, user, onlineUsers) => {
   let name = "";
   let avatar = "";
+  let isOnline = false;
 
   if (!chat.isGroup) {
     chat?.participants?.forEach((p, i) => {
-      if (p?._id.toString() !== user) {
+      if (p?._id.toString() !== user?._id) {
         name = p?.name;
         avatar = p?.avatar;
+        isOnline = onlineUsers?.includes(p?._id);
       }
     });
   } else {
@@ -14,7 +16,7 @@ export const getChatDetails = (chat, user) => {
     avatar =
       "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000";
   }
-  return { name, avatar, isGroup: chat.isGroup };
+  return { name, avatar, isGroup: chat.isGroup, isOnline };
 };
 
 export const getLastMessageText = (chat, user) => {

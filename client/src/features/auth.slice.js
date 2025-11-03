@@ -2,25 +2,26 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { clearChatState } from "./chat.slice";
 
+const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
+
 const initialState = {
   loading: "",
   data: {
     user: null,
     usersList: null,
+    socket: null,
+    onlineUsers: null,
   },
   error: "",
 };
 
 export const login = createAsyncThunk(
   "login",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, getState }) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/login`,
-        payload,
-        { withCredentials: true }
-      );
-
+      const res = await axios.post(`${BASE_URL}/auth/login`, payload, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -30,14 +31,11 @@ export const login = createAsyncThunk(
 
 export const signup = createAsyncThunk(
   "signup",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, getState }) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/signup`,
-        payload,
-        { withCredentials: true }
-      );
-
+      const res = await axios.post(`${BASE_URL}/auth/signup`, payload, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -47,16 +45,12 @@ export const signup = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   "logout",
-  async (payload, { rejectWithValue, dispatch }) => {
+  async (payload, { rejectWithValue, dispatch, getState }) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/logout`,
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
-
+      const socket = getState().auth.data.socket;
+      const res = await axios.post(`${BASE_URL}/auth/logout`, payload, {
+        withCredentials: true,
+      });
       dispatch(clearChatState());
 
       return res.data;
@@ -68,12 +62,11 @@ export const logout = createAsyncThunk(
 
 export const loadUser = createAsyncThunk(
   "loadUser",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/user/me`,
-        { withCredentials: true }
-      );
+      const res = await axios.get(`${BASE_URL}/user/me`, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -85,12 +78,9 @@ export const getUsers = createAsyncThunk(
   "getUsers",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/user/all`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${BASE_URL}/user/all`, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -103,7 +93,7 @@ export const updateUser = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_SERVER_URL}/user/${payload.userId}`,
+        `${BASE_URL}/user/${payload.userId}`,
         payload,
         {
           withCredentials: true,
@@ -119,6 +109,14 @@ export const updateUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    setSocket: (state, action) => {
+      state.data.socket = action.payload;
+    },
+    setOnlineUsers: (state, action) => {
+      state.data.onlineUsers = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loadUser.pending, (state, action) => {
       state.loading = true;
@@ -147,6 +145,7 @@ const authSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
+
       state.data.user = action.payload.user;
     });
     builder.addCase(login.rejected, (state, action) => {
@@ -171,7 +170,9 @@ const authSlice = createSlice({
       state.loading = false;
       state.data = {
         user: null,
-        usersList: [],
+        usersList: null,
+        socket: null,
+        onlineUsers: null,
       };
     });
     builder.addCase(logout.rejected, (state, action) => {
@@ -191,5 +192,7 @@ const authSlice = createSlice({
     });
   },
 });
+
+export const { setSocket, setOnlineUsers } = authSlice.actions;
 
 export default authSlice.reducer;

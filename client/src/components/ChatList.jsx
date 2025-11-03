@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Search, SquarePen } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatListItem from "./ChatListItem";
-import { setModal } from "../features/chat.slice";
+import {
+  addNewChat,
+  setModal,
+  updateChatLastMessage,
+} from "../features/chat.slice";
+import { useEffect } from "react";
 
 const ChatList = () => {
   const [search, setSearch] = useState("");
@@ -13,8 +18,38 @@ const ChatList = () => {
   } = useSelector((state) => state.chat);
 
   const {
-    data: { user },
+    data: { user, onlineUsers, socket },
   } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewChat = (newChat) => {
+      console.log("Recieved new chat", newChat);
+      dispatch(addNewChat(newChat));
+    };
+
+    socket.on("chat:new", handleNewChat);
+
+    return () => {
+      socket.off("chat:new", handleNewChat);
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleChatUpdate = (data) => {
+      const { chatId, lastMessage } = data;
+      dispatch(updateChatLastMessage({ chatId, lastMessage }));
+    };
+
+    socket.on("chat:update", handleChatUpdate);
+
+    return () => {
+      socket.off("chat:update", handleChatUpdate);
+    };
+  }, [socket]);
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col px-2 py-4 border-b border-gray-300 dark:border-gray-700">
@@ -23,7 +58,7 @@ const ChatList = () => {
             Chat
           </h2>
           <SquarePen
-            onClick={()=>dispatch(setModal(true))}
+            onClick={() => dispatch(setModal(true))}
             className="w-5 h-5 text-gray-500 dark:text-gray-400 cursor-pointer"
           />
         </div>
@@ -41,7 +76,14 @@ const ChatList = () => {
       <div className="h-full overflow-y-auto">
         {chats?.length !== 0 ? (
           chats?.map((chat, i) => {
-            return <ChatListItem key={chat?._id} chat={chat} user={user} />;
+            return (
+              <ChatListItem
+                key={chat?._id}
+                chat={chat}
+                user={user}
+                onlineUsers={onlineUsers}
+              />
+            );
           })
         ) : (
           <></>

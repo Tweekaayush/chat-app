@@ -39,30 +39,28 @@ const Modal = () => {
     >
       <div
         ref={ref}
-        className="bg-white dark:bg-gray-900 rounded-md w-full md:w-[500px] h-[600px]"
+        className="bg-white dark:bg-gray-900 rounded-md w-full md:w-[500px] h-[600px] border border-gray-200 dark:border-gray-800"
       >
         <div className="flex justify-between items-center mb-4">
           <div
+            onClick={() => setOpen(false)}
             className={`${
               !open
                 ? "bg-white dark:bg-gray-900 text-black dark:text-white"
                 : "bg-gray-200 dark:bg-gray-950/50 text-gray-600 dark:text-gray-400"
             } flex-1 flex items-center justify-center py-4 px-2 cursor-pointer`}
           >
-            <h4 className="text-3xl" onClick={() => setOpen(false)}>
-              Chats
-            </h4>
+            <h4 className="text-2xl">Chats</h4>
           </div>
           <div
+            onClick={() => setOpen(true)}
             className={`${
               open
                 ? "bg-white dark:bg-gray-900 text-black dark:text-white"
                 : "bg-gray-200 dark:bg-gray-950/50 text-gray-600 dark:text-gray-400"
             } flex-1 flex items-center justify-center py-4 px-2 cursor-pointer`}
           >
-            <h4 className="text-3xl " onClick={() => setOpen(true)}>
-              Create Group
-            </h4>
+            <h4 className="text-2xl ">Create Group</h4>
           </div>
         </div>
         <div className="w-full h-[516px]">
