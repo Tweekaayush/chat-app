@@ -102,7 +102,7 @@ const SingleChatPage = () => {
         send={send}
         replyMessage={newMessageInfo.replyToMessage}
         isGroup={singleChat.isGroup}
-        content={setNewMessageInfo.content}
+        content={newMessageInfo.content}
         setNewMessageInfo={setNewMessageInfo}
       />
     </div>

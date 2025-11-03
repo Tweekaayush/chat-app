@@ -40,7 +40,9 @@ const ChatHeader = ({ singleChat, user, onlineUsers }) => {
             Online
           </p>
         ) : (
-          <></>
+          <p className="text-xs text-gray-400 dark:text-gray-500">
+            Offline
+          </p>
         )}
       </div>
     </div>

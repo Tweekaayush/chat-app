@@ -25,7 +25,7 @@
   }
 
   .user-icon {
-    @apply w-8 h-8 relative border border-gray-600 dark:border-gray-400 rounded-full;
+    @apply w-9 h-9 relative border border-gray-600 dark:border-gray-400 rounded-full;
   }
 
   .user-icon img {
