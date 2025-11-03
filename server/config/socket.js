@@ -1,5 +1,6 @@
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
+const { emit } = require("../../../chat-app-mern/backend/models/userModel");
 
 let io = null;
 const onlineUsers = new Map();
@@ -47,6 +48,15 @@ exports.initializeSocket = (server) => {
     socket.on("chat:leave", (chatId) => {
       socket.leave(`chat:${chatId}`);
       console.log(`User ${userId} left room chat:${chatId}`);
+    });
+
+
+    socket.on("chat:typing", (chatId) => {
+      socket.in(`chat:${chatId}`).emit('chat:typing');
+    });
+
+    socket.on("chat:stop-typing", (chatId) => {
+      socket.in(`chat:${chatId}`).emit('chat:stop-typing');
     });
 
     socket.on("disconnect", () => {

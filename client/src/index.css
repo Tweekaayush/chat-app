@@ -6,6 +6,24 @@
 @theme {
   --font-saira: "Saira", sans-serif;
   --color-primary: var(--color-blue-600);
+  --animate-typing: typing 1.5s ease-in-out infinite;
+  @keyframes typing {
+    0% {
+      transform: translateY(0%);
+    }
+    20% {
+      transform: translateY(0%);
+    }
+    50% {
+      transform: translateY(-100%);
+    }
+    80% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
 }
 
 @layer base {

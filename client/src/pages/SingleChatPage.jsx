@@ -10,9 +10,10 @@ import {
 import ChatHeader from "../components/ChatHeader";
 import ChatInput from "../components/ChatInput";
 import Message from "../components/Message";
-// import Message from "../components/Message";
+import { useRef } from "react";
 
 const SingleChatPage = () => {
+  let timeout = useRef();
   const { chatId } = useParams();
   const dispatch = useDispatch();
   const [newMessageInfo, setNewMessageInfo] = useState({
@@ -20,8 +21,7 @@ const SingleChatPage = () => {
     media: "",
     replyToMessage: null,
   });
-  const [content, setContent] = useState("");
-  const [media, setMedia] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   const {
     loading,
@@ -36,6 +36,7 @@ const SingleChatPage = () => {
     e.preventDefault();
     const { content, media, replyToMessage } = newMessageInfo;
     if (content || media || replyToMessage) {
+      socket.emit("chat:stop-typing", chatId);
       dispatch(
         sendMessage({ chatId, content, media, replyToId: replyToMessage?._id })
       );
@@ -46,6 +47,25 @@ const SingleChatPage = () => {
       });
     }
   };
+
+  const handleType = (e) => {
+    setNewMessageInfo((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+
+    if (!socket) return;
+    if (!isTyping) {
+      socket.emit("chat:typing", chatId);
+    }
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
+      socket.emit("chat:stop-typing", chatId);
+    }, 2000);
+  };
+
   useEffect(() => {
     if (chatId) {
       dispatch(getChatById(chatId));
@@ -74,22 +94,51 @@ const SingleChatPage = () => {
       socket.off("message:new", handleNewMessage);
     };
   }, [socket, chatId, addNewMessage]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket?.on("chat:typing", () => setIsTyping(true));
+    return () => socket?.on("chat:stop-typing", () => setIsTyping(false));
+  }, [socket]);
+
   return (
     <div className="h-full flex flex-col">
-      <ChatHeader singleChat={singleChat} user={user} onlineUsers={onlineUsers}/>
+      <ChatHeader
+        singleChat={singleChat}
+        user={user}
+        onlineUsers={onlineUsers}
+      />
       <div className="h-full flex flex-col-reverse overflow-y-auto p-4">
         {messages?.length ? (
-          messages?.map((message) => {
-            return (
-              <Message
-                key={message?._id}
-                singleChat={singleChat}
-                message={message}
-                user={user._id}
-                setNewMessageInfo={setNewMessageInfo}
-              />
-            );
-          })
+          <>
+            {isTyping && (
+              <div className={`${isTyping?'':''} w-fit flex bg-gray-200/70 dark:bg-white/10 px-2 py-4 rounded-md gap-2`}>
+                <div
+                  className="bg-black dark:bg-white p-0.5 rounded-full animate-typing"
+                  style={{ animationDelay: "0.2s" }}
+                ></div>
+                <div
+                  className="bg-black dark:bg-white p-0.5 rounded-full animate-typing"
+                  style={{ animationDelay: "0.4s" }}
+                ></div>
+                <div
+                  className="bg-black dark:bg-white p-0.5 rounded-full animate-typing delay-1000"
+                  style={{ animationDelay: "0.6s" }}
+                ></div>
+              </div>
+            )}
+            {messages?.map((message) => {
+              return (
+                <Message
+                  key={message?._id}
+                  singleChat={singleChat}
+                  message={message}
+                  user={user._id}
+                  setNewMessageInfo={setNewMessageInfo}
+                />
+              );
+            })}
+          </>
         ) : (
           <div className="h-full w-full flex items-center justify-center">
             <p className="text-base text-gray-600 dark:text-gray-400">
@@ -104,6 +153,7 @@ const SingleChatPage = () => {
         isGroup={singleChat.isGroup}
         content={newMessageInfo.content}
         setNewMessageInfo={setNewMessageInfo}
+        handleType={handleType}
       />
     </div>
   );

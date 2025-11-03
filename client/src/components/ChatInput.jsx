@@ -8,6 +8,7 @@ const ChatInput = ({
   isGroup,
   setNewMessageInfo,
   content,
+  handleType
 }) => {
   return (
     <>
@@ -32,14 +33,7 @@ const ChatInput = ({
             className="w-full border border-gray-300 dark:border-gray-700 rounded-sm text-black: dark:text-white p-3 focus:border-blue-600 outline-none"
             placeholder="Type a new message"
             value={content}
-            onChange={(e) =>
-              setNewMessageInfo((prev) => {
-                return {
-                  ...prev,
-                  [e.target.name]: e.target.value,
-                };
-              })
-            }
+            onChange={handleType}
           />
           <button
             type="submit"
