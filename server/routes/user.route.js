@@ -4,8 +4,8 @@ const { getUsers, profile, updateUserById } = require("../controllers/user.contr
 
 const router = express.Router();
 
+router.get("/", protected, getUsers);
 router.get("/me", protected, profile);
-router.get("/all", protected, getUsers);
 router.put('/:id', protected, updateUserById)
 
 module.exports = router;

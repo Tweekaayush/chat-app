@@ -78,7 +78,7 @@ export const getUsers = createAsyncThunk(
   "getUsers",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/user/all`, {
+      const res = await axios.get(`${BASE_URL}/user?search=${payload}`, {
         withCredentials: true,
       });
       return res.data;

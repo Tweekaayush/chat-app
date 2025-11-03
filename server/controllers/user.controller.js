@@ -1,6 +1,6 @@
 const asyncHandler = require("../middleware/async.middleware");
 const User = require("../models/user.model");
-const cloudinary = require('cloudinary')
+const cloudinary = require("cloudinary");
 
 exports.profile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -11,9 +11,21 @@ exports.profile = asyncHandler(async (req, res) => {
 });
 
 exports.getUsers = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
+  const { search } = req.query;
+  const keyword = search
+    ? {
+        _id: {
+          $ne: req.user._id,
+        },
+        $or: [
+          {
+            name: { $regex: search, $options: "i" },
+          },
+        ],
+      }
+    : { _id: { $ne: req.user._id } };
 
-  const users = await User.find({ _id: { $ne: _id } }).select("-password");
+  const users = await User.find(keyword).select("-password").limit(6);
 
   res.status(200).json({
     success: true,
