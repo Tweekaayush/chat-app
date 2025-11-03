@@ -8,18 +8,18 @@ import {
   updateChatLastMessage,
 } from "../features/chat.slice";
 import { useEffect } from "react";
+import { getChatDetails } from "../utils/chat.utils";
 
 const ChatList = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-
   const {
     data: { chats },
   } = useSelector((state) => state.chat);
-
   const {
     data: { user, onlineUsers, socket },
   } = useSelector((state) => state.auth);
+  const [filteredChats, setFilteredChats] = useState(chats || []);
 
   useEffect(() => {
     if (!socket) return;
@@ -50,6 +50,23 @@ const ChatList = () => {
       socket.off("chat:update", handleChatUpdate);
     };
   }, [socket]);
+
+  useEffect(() => {
+    setFilteredChats((prev) => {
+      if (search === "") {
+        return chats;
+      } else {
+        return prev.filter((item) => {
+          const { name } = getChatDetails(item, user, onlineUsers);
+          return name.toLowerCase().includes(search);
+        });
+      }
+    });
+  }, [search]);
+
+  useEffect(() => {
+    setFilteredChats(chats);
+  }, [chats]);
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col px-2 py-4 border-b border-gray-300 dark:border-gray-700">
@@ -74,8 +91,8 @@ const ChatList = () => {
         </div>
       </div>
       <div className="h-full overflow-y-auto">
-        {chats?.length !== 0 ? (
-          chats?.map((chat, i) => {
+        {filteredChats?.length !== 0 ? (
+          filteredChats?.map((chat, i) => {
             return (
               <ChatListItem
                 key={chat?._id}
