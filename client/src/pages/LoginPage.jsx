@@ -84,7 +84,7 @@ const LoginPage = () => {
             />
             <Mail />
           </div>
-          {formErrors.email && <p>{formErrors.email}</p>}
+          {formErrors.email && <p className="error-msg">{formErrors.email}</p>}
         </div>
         <div className="form-input">
           <label htmlFor="password">Password</label>
@@ -99,7 +99,9 @@ const LoginPage = () => {
             />
             <Lock />
           </div>
-          {formErrors.password && <p>{formErrors.password}</p>}
+          {formErrors.password && (
+            <p className="error-msg">{formErrors.password}</p>
+          )}
         </div>
         <button type="submit" className="button-1">
           Login

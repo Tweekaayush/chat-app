@@ -1,5 +1,6 @@
 const { generateToken } = require("../../../ecommerce/server/utils/authUtil");
 const asyncHandler = require("../middleware/async.middleware");
+const cloudinary = require("cloudinary");
 const User = require("../models/user.model");
 
 exports.signup = asyncHandler(async (req, res) => {
