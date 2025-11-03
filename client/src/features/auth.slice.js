@@ -98,6 +98,24 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "updateUser",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.put(
+        `${import.meta.env.VITE_SERVER_URL}/user/${payload.userId}`,
+        payload,
+        {
+          withCredentials: true,
+        }
+      );
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -110,6 +128,17 @@ const authSlice = createSlice({
       state.data.user = action.payload.user;
     });
     builder.addCase(loadUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(updateUser.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.user = action.payload.user;
+    });
+    builder.addCase(updateUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

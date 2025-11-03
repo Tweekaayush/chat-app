@@ -19,7 +19,7 @@ const BaseLayout = () => {
           !open ? "hidden lg:block" : "block"
         } h-screen col-span-12 lg:col-span-9`}
       >
-        <Outlet />
+        <Outlet context={[setOpen]} />
       </div>
     </AppWrapper>
   );

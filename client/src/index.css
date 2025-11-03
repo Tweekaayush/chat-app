@@ -61,7 +61,7 @@
   }
 
   .form-input {
-    @apply flex flex-col mb-4;
+    @apply flex flex-col mb-4 w-full;
   }
 
   .form-input label {

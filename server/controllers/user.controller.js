@@ -1,5 +1,6 @@
 const asyncHandler = require("../middleware/async.middleware");
 const User = require("../models/user.model");
+const cloudinary = require('cloudinary')
 
 exports.profile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -21,10 +22,10 @@ exports.getUsers = asyncHandler(async (req, res) => {
 });
 
 exports.updateUserById = asyncHandler(async (req, res) => {
-  const { _id } = req.params;
+  const { id } = req.params;
   const { email, password, name, avatar, about } = req.body;
 
-  const user = await User.findById(_id);
+  const user = await User.findById(id);
 
   user.email = email || user.email;
   user.name = name || user.name;
@@ -35,9 +36,7 @@ exports.updateUserById = asyncHandler(async (req, res) => {
   }
 
   if (avatar) {
-    const cloudinaryResponse = await cloudinary.uploader.upload(avatar, {
-      folder: "chat",
-    });
+    const cloudinaryResponse = await cloudinary.uploader.upload(avatar);
     user.avatar = cloudinaryResponse?.secure_url;
   }
 
