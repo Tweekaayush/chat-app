@@ -44,8 +44,13 @@ exports.createChat = asyncHandler(async (req, res) => {
       });
     }
   }
-  
+
   const populatedChat = await chat.populate("participants", "name avatar");
+  const particpantIdStrings = populatedChat?.participants?.map((p) => {
+    return p._id?.toString();
+  });
+
+  emitNewChatToParticpants(particpantIdStrings, populatedChat);
 
   res.status(200).json({
     success: true,
@@ -98,7 +103,7 @@ exports.getSingleChat = asyncHandler(async (req, res) => {
         select: "name avatar",
       },
     })
-    .sort({createdAt: -1});
+    .sort({ createdAt: -1 });
 
   res.status(200).json({
     success: true,

@@ -2,6 +2,7 @@ const asyncHandler = require("../middleware/async.middleware");
 const cloudinary = require("cloudinary");
 const Chat = require("../models/chat.model");
 const Message = require("../models/message.model");
+const { emitNewMessageToChatRoom } = require("../config/socket");
 
 exports.sendMessage = asyncHandler(async (req, res) => {
   const { chatId, content, media, replyToId } = req.body;
@@ -62,6 +63,11 @@ exports.sendMessage = asyncHandler(async (req, res) => {
   chat.lastMessage = newMessage._id;
 
   await chat.save();
+
+  emitNewMessageToChatRoom(req.user._id, chatId, newMessage);
+  
+  const allParticipantIds = chat.participants.map((id) => id.toString());
+  emitLastMessageToParticipants(allParticipantIds, chatId, newMessage);
 
   res.status(200).json({
     userMessage: newMessage,
