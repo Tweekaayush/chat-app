@@ -6,7 +6,6 @@ const onlineUsers = new Map();
 
 exports.initializeSocket = (server) => {
   io = new Server(server, {
-    pingTimeout: 120000,
     cors: {
       origin: process.env.CLIENT_URL,
       credentials: true,
