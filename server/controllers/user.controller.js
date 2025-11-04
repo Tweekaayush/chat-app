@@ -47,7 +47,7 @@ exports.updateUserById = asyncHandler(async (req, res) => {
     user.password = password;
   }
 
-  if (avatar) {
+  if (avatar && avatar !== user?.avatar) {
     const cloudinaryResponse = await cloudinary.uploader.upload(avatar);
     user.avatar = cloudinaryResponse?.secure_url;
   }
