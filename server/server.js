@@ -12,6 +12,7 @@ const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
 const chatRoute = require("./routes/chat.route");
 const { initializeSocket } = require("./config/socket");
+const path = require('path')
 
 const app = express();
 const server = createServer(app);
@@ -40,9 +41,19 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/chat", chatRoute);
 
-app.get('/', (req, res)=>{
-  res.send('Server is Up and Running')
-})
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.json("Server Running");
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);
