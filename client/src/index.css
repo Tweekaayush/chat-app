@@ -5,7 +5,7 @@
 
 @theme {
   --font-saira: "Saira", sans-serif;
-  --color-primary: var(--color-blue-600);
+  --color-primary: var(--color-violet-600);
   --animate-typing: typing 1.5s ease-in-out infinite;
   @keyframes typing {
     0% {
@@ -71,11 +71,11 @@
   }
 
   .auth-sub-title {
-    @apply mb-1.5 font-medium text-base text-gray-600 dark:text-gray-400;
+    @apply text-lg font-medium text-gray-600 dark:text-gray-400 tracking-wide;
   }
 
   .auth-title {
-    @apply mb-9 text-4xl sm:text-6xl font-bold text-black dark:text-white;
+    @apply text-2xl sm:text-4xl uppercase font-bold text-black dark:text-white my-8;
   }
 
   .form-input {
@@ -91,7 +91,7 @@
   }
 
   .form-input input {
-    @apply py-4 pl-6 pr-10 w-full text-base text-black dark:text-white outline-none focus:border-blue-600 placeholder:text-gray-600 dark:placeholder:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-md;
+    @apply py-4 pl-6 pr-10 w-full text-base text-black dark:text-white outline-none focus:border-primary placeholder:text-gray-600 dark:placeholder:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-md;
   }
 
   .form-input svg {

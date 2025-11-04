@@ -66,9 +66,7 @@ const LoginPage = () => {
   }, [user]);
   return (
     <div className="auth-form-container">
-      <h4 className="auth-sub-title">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, id!
-      </h4>
+      <h4 className="auth-sub-title">It's great to see you back</h4>
       <h1 className="auth-title">Login</h1>
       <form onSubmit={handleSubmit} className="auth-form">
         <div className="form-input">

@@ -174,7 +174,7 @@ const SignUpPage = () => {
           <h4 className="text-base text-black dark:text-white font-medium capitalize mb-2.5">
             Avatar
           </h4>
-          <div className="w-30 h-30 rounded-full overflow-hidden cursor-pointer relative group mb-8 border border-gray-800 dark:border-gray-200">
+          <div className="w-25 h-25 rounded-full overflow-hidden cursor-pointer relative group mb-8 border border-gray-800 dark:border-gray-200">
             <img
               src={formData.avatar}
               alt="avatar"

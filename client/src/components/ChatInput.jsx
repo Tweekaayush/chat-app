@@ -30,7 +30,7 @@ const ChatInput = ({
           <input
             type="text"
             name="content"
-            className="w-full border border-gray-300 dark:border-gray-700 rounded-sm text-black: dark:text-white p-3 focus:border-blue-600 outline-none"
+            className="w-full border border-gray-300 dark:border-gray-700 rounded-sm text-black: dark:text-white p-3 focus:border-primary outline-none"
             placeholder="Type a new message"
             value={content}
             onChange={handleType}

@@ -1,10 +1,18 @@
 import React from "react";
-import { getChatDetails, getLastMessageText } from "../utils/chat.utils";
+import {
+  formatChatTime,
+  getChatDetails,
+  getLastMessageText,
+} from "../utils/chat.utils";
 import { useNavigate } from "react-router-dom";
 
 const ChatListItem = ({ chat, user, onlineUsers }) => {
   const navigate = useNavigate();
-  const { isOnline, name, avatar, isGroup } = getChatDetails(chat, user, onlineUsers);
+  const { isOnline, name, avatar, isGroup } = getChatDetails(
+    chat,
+    user,
+    onlineUsers
+  );
   const { lastMessage } = getLastMessageText(chat, user);
   return (
     <div
@@ -21,6 +29,11 @@ const ChatListItem = ({ chat, user, onlineUsers }) => {
         </h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 ellipses">
           {lastMessage}
+        </p>
+      </div>
+      <div className="mb-auto">
+        <p className="text-xs text-gray-500 p-1">
+          {formatChatTime(chat?.lastMessage?.updatedAt)}
         </p>
       </div>
     </div>

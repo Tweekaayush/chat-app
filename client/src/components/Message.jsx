@@ -5,7 +5,8 @@ import ReplyMessage from "./ReplyMessage";
 const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
   const time = new Date(message.createdAt);
   const hour = time.getHours();
-  const min = time.getMinutes();
+  let min = time.getMinutes();
+  min = min < 10 ? "0" + min : min;
   const incomingMsg = message?.sender?._id !== user;
   return (
     <div
@@ -33,7 +34,9 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
         )}
         <p
           className={`${
-            !incomingMsg ? "text-white text-right" : "text-black dark:text-white"
+            !incomingMsg
+              ? "text-white text-right"
+              : "text-black dark:text-white"
           } text-base mt-2`}
         >
           {message?.content}
@@ -58,8 +61,8 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
             })
           }
         >
-          <div className="rounded-full bg-gray-100 dark:bg-white/3 p-2 ml-4">
-            <Reply className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+          <div className="rounded-full bg-gray-100 dark:bg-white/10 p-2 ml-4">
+            <Reply className="w-4 h-4 text-gray-600 dark:text-white" />
           </div>
         </div>
       )}

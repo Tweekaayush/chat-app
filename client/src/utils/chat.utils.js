@@ -1,3 +1,5 @@
+import { format, isToday, isYesterday, isThisWeek } from "date-fns";
+
 export const getChatDetails = (chat, user, onlineUsers) => {
   let name = "";
   let avatar = "";
@@ -44,4 +46,15 @@ export const getLastMessageText = (chat, user) => {
   }
 
   return { lastMessage: lastMessage?.content };
+};
+
+export const formatChatTime = (date) => {
+  if (!date) return "";
+  const newDate = new Date(date);
+  if (isNaN(newDate.getTime())) return "Invalid date";
+
+  if (isToday(newDate)) return format(newDate, "k:mm");
+  if (isYesterday(newDate)) return "Yesterday";
+  if (isThisWeek(newDate)) return format(newDate, "EEEE");
+  return format(newDate, "M/d");
 };
