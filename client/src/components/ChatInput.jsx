@@ -8,7 +8,8 @@ const ChatInput = ({
   isGroup,
   setNewMessageInfo,
   content,
-  handleType
+  handleType,
+  loading
 }) => {
   return (
     <>
@@ -38,6 +39,7 @@ const ChatInput = ({
           <button
             type="submit"
             className="bg-primary/90 p-4 rounded-sm cursor-pointer hover:bg-primary"
+            disabled={loading}
           >
             <Send className="w-4 h-4 text-white" />
           </button>

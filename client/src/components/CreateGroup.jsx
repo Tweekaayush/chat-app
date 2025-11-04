@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../features/auth.slice";
 import UserListItem from "./UserListItem";
 import { createChat } from "../features/chat.slice";
-import { useNavigate } from "react-router-dom";
+import Skeleton from "./Skeleton";
 
 const CreateGroup = () => {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const CreateGroup = () => {
   });
 
   const {
+    loading,
     data: { usersList },
   } = useSelector((state) => state.auth);
 
@@ -42,9 +43,14 @@ const CreateGroup = () => {
     }
   };
 
-  useEffect(() => {
+  const searchUsers = useCallback(() => {
     dispatch(getUsers(formData.search));
   }, [formData.search]);
+
+  useEffect(() => {
+    const timeout = setTimeout(searchUsers, 1000);
+    return () => clearTimeout(timeout);
+  }, [searchUsers]);
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -88,27 +94,34 @@ const CreateGroup = () => {
               />
             );
           })}
-          {usersList
-            ?.filter((user) => {
-              let flag = true;
-              formData?.members?.forEach((member) => {
-                if (member?._id === user?._id) flag = false;
-              });
-              return flag;
-            })
-            .map((user) => {
-              return (
-                <UserListItem
-                  key={user._id}
-                  {...user}
-                  handleClick={() =>
-                    setFormData((prev) => {
-                      return { ...prev, members: [...formData.members, user] };
-                    })
-                  }
-                />
-              );
-            })}
+          {!loading
+            ? usersList
+                ?.filter((user) => {
+                  let flag = true;
+                  formData?.members?.forEach((member) => {
+                    if (member?._id === user?._id) flag = false;
+                  });
+                  return flag;
+                })
+                .map((user) => {
+                  return (
+                    <UserListItem
+                      key={user._id}
+                      {...user}
+                      handleClick={() =>
+                        setFormData((prev) => {
+                          return {
+                            ...prev,
+                            members: [...formData.members, user],
+                          };
+                        })
+                      }
+                    />
+                  );
+                })
+            : new Array(4).fill(0).map((_, i) => {
+                return <Skeleton key={i} classname={`w-full h-15 my-2`} />;
+              })}
         </div>
         <button className="button-1">Create</button>
       </form>

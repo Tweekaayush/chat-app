@@ -1,5 +1,6 @@
 import {
   ArrowLeft,
+  LoaderCircle,
   Lock,
   Mail,
   MessageSquareMore,
@@ -15,6 +16,7 @@ const AccountPage = (props) => {
   const [setOpen] = useOutletContext();
   const dispatch = useDispatch();
   const {
+    loading,
     data: { user },
   } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
@@ -144,8 +146,12 @@ const AccountPage = (props) => {
             <MessageSquareMore />
           </div>
         </div>
-        <button type="submit" className="button-1">
-          Save changes
+        <button type="submit" className="button-1" disabled={loading}>
+          {!loading ? (
+            "Save changes"
+          ) : (
+            <LoaderCircle className="mx-auto animate-spin" />
+          )}
         </button>
       </form>
     </div>

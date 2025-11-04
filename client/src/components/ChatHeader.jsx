@@ -4,8 +4,9 @@ import { getChatDetails } from "../utils/chat.utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearSingleChat } from "../features/chat.slice";
+import Skeleton from "../components/Skeleton";
 
-const ChatHeader = ({ singleChat, user, onlineUsers }) => {
+const ChatHeader = ({ singleChat, user, onlineUsers, loading }) => {
   const { name, avatar, isGroup, isOnline } = getChatDetails(
     singleChat,
     user,
@@ -20,31 +21,44 @@ const ChatHeader = ({ singleChat, user, onlineUsers }) => {
         className="text-gray-700 dark:text-gray-300 mr-4 block lg:hidden cursor-pointer"
         onClick={() => navigate("/chat")}
       />
-      <div className="relative w-9 mr-4 border border-gray-600 dark:border-gray-400 rounded-full">
-        <img
-          src={avatar}
-          alt={name}
-          className="w-full aspect-square rounded-full"
-        />
-      </div>
-      <div className="flex flex-col flex-1">
-        <h3 className="text-sm text-black dark:text-white ellipses">
-          {name}
-        </h3>
-        {isGroup ? (
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {singleChat?.participants?.length} Members
-          </p>
-        ) : isOnline ? (
-          <p className="text-xs text-green-500 dark:text-green-400">
-            Online
-          </p>
-        ) : (
-          <p className="text-xs text-gray-400 dark:text-gray-500">
-            Offline
-          </p>
-        )}
-      </div>
+      {!loading ? (
+        <>
+          {" "}
+          <div className="relative w-9 h-9 mr-4 border border-gray-600 dark:border-gray-400 rounded-full">
+            <img
+              src={avatar}
+              alt={name}
+              className="w-full h-full object-fit rounded-full"
+            />
+          </div>
+          <div className="flex flex-col flex-1">
+            <h3 className="text-sm text-black dark:text-white ellipses">
+              {name}
+            </h3>
+            {isGroup ? (
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {singleChat?.participants?.length} Members
+              </p>
+            ) : isOnline ? (
+              <p className="text-xs text-green-500 dark:text-green-400">
+                Online
+              </p>
+            ) : (
+              <p className="text-xs text-gray-400 dark:text-gray-500">
+                Offline
+              </p>
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <Skeleton classname="w-9 h-9 rounded-full mr-4" />
+          <div className="flex flex-col">
+            <Skeleton classname="w-30 h-4 mb-2 rounded-xs" />
+            <Skeleton classname="w-20 h-3 rounded-xs" />
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -9,11 +9,13 @@ import {
 } from "../features/chat.slice";
 import { useEffect } from "react";
 import { getChatDetails } from "../utils/chat.utils";
+import Skeleton from "./Skeleton";
 
 const ChatList = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const {
+    loading: chatsLoading,
     data: { chats },
   } = useSelector((state) => state.chat);
   const {
@@ -91,20 +93,20 @@ const ChatList = () => {
         </div>
       </div>
       <div className="h-full overflow-y-auto">
-        {filteredChats?.length !== 0 ? (
-          filteredChats?.map((chat, i) => {
-            return (
-              <ChatListItem
-                key={chat?._id}
-                chat={chat}
-                user={user}
-                onlineUsers={onlineUsers}
-              />
-            );
-          })
-        ) : (
-          <></>
-        )}
+        {!chatsLoading
+          ? filteredChats?.map((chat, i) => {
+              return (
+                <ChatListItem
+                  key={chat?._id}
+                  chat={chat}
+                  user={user}
+                  onlineUsers={onlineUsers}
+                />
+              );
+            })
+          : new Array(4).fill(0).map((_, i) => {
+              return <Skeleton key={i} classname={`w-full h-15 my-2`} />;
+            })}
       </div>
     </div>
   );

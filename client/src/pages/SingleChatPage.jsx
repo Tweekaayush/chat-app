@@ -111,6 +111,7 @@ const SingleChatPage = () => {
         singleChat={singleChat}
         user={user}
         onlineUsers={onlineUsers}
+        loading={loading}
       />
       <div className="h-full flex flex-col-reverse overflow-y-auto p-4">
         {messages?.length ? (
@@ -162,6 +163,7 @@ const SingleChatPage = () => {
         content={newMessageInfo.content}
         setNewMessageInfo={setNewMessageInfo}
         handleType={handleType}
+        loading={loading}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Mail, Lock, User, Pencil } from "lucide-react";
+import { Mail, Lock, User, Pencil, LoaderCircle } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../features/auth.slice";
@@ -26,6 +26,7 @@ const SignUpPage = () => {
   const dispatch = useDispatch();
 
   const {
+    loading,
     data: { user },
   } = useSelector((state) => state.auth);
 
@@ -199,8 +200,12 @@ const SignUpPage = () => {
             <p className="error-msg">{formErrors.avatar}</p>
           )}
         </div>
-        <button type="submit" className="button-1">
-          Sign Up
+        <button type="submit" className="button-1" disabled={loading}>
+          {!loading ? (
+            "Sign Up"
+          ) : (
+            <LoaderCircle className="mx-auto animate-spin" />
+          )}
         </button>
         <p className="auth-link">
           Already have an account ?<Link to="/">Login</Link>
