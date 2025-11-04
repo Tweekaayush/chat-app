@@ -11,6 +11,7 @@ const initialState = {
     socket: null,
     onlineUsers: null,
   },
+  success: "",
   error: "",
 };
 
@@ -111,6 +112,10 @@ const authSlice = createSlice({
     setOnlineUsers: (state, action) => {
       state.data.onlineUsers = action.payload;
     },
+    clearAuthSuccessAndError: (state, action) => {
+      state.success = "";
+      state.error = "";
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loadUser.pending, (state, action) => {
@@ -122,7 +127,6 @@ const authSlice = createSlice({
     });
     builder.addCase(loadUser.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
     });
     builder.addCase(updateUser.pending, (state, action) => {
       state.loading = true;
@@ -130,6 +134,7 @@ const authSlice = createSlice({
     builder.addCase(updateUser.fulfilled, (state, action) => {
       state.loading = false;
       state.data.user = action.payload.user;
+      state.success = "User updated";
     });
     builder.addCase(updateUser.rejected, (state, action) => {
       state.loading = false;
@@ -140,8 +145,8 @@ const authSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
-
       state.data.user = action.payload.user;
+      state.success = "Logged In";
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
@@ -153,6 +158,7 @@ const authSlice = createSlice({
     builder.addCase(signup.fulfilled, (state, action) => {
       state.loading = false;
       state.data.user = action.payload.user;
+      state.success = "Sign Up Successfull";
     });
     builder.addCase(signup.rejected, (state, action) => {
       state.loading = false;
@@ -169,6 +175,7 @@ const authSlice = createSlice({
         socket: null,
         onlineUsers: null,
       };
+      state.success = "Logged Out";
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.loading = false;
@@ -188,6 +195,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setSocket, setOnlineUsers } = authSlice.actions;
+export const { setSocket, setOnlineUsers, clearAuthSuccessAndError } =
+  authSlice.actions;
 
 export default authSlice.reducer;

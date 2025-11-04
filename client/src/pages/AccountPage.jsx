@@ -52,9 +52,29 @@ const AccountPage = (props) => {
     reader.readAsDataURL(file);
   };
 
+  const validate = () => {
+    if (formData.email !== user?.email) {
+      return true;
+    }
+    if (formData.about !== user?.about) {
+      return true;
+    }
+    if (formData.name !== user?.name) {
+      return true;
+    }
+    if (formData.password !== "") {
+      return true;
+    }
+    if (formData.avatar !== user?.avatar) {
+      return true;
+    }
+    return false;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ ...formData, userId: user?._id }));
+    console.log(validate())
+    if (validate()) dispatch(updateUser({ ...formData, userId: user?._id }));
   };
 
   return (
