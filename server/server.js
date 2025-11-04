@@ -24,6 +24,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +39,10 @@ app.use(
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/chat", chatRoute);
+
+app.get('/', (req, res)=>{
+  res.send('Server is Up and Running')
+})
 
 app.use(notFound);
 app.use(errorHandler);
