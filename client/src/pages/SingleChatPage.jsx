@@ -98,7 +98,11 @@ const SingleChatPage = () => {
   useEffect(() => {
     if (!socket) return;
     socket?.on("chat:typing", () => setIsTyping(true));
-    return () => socket?.on("chat:stop-typing", () => setIsTyping(false));
+    socket?.on("chat:stop-typing", () => setIsTyping(false));
+    return () => {
+      socket?.off("chat:typing", () => setIsTyping(true));
+      socket?.off("chat:stop-typing", () => setIsTyping(false));
+    };
   }, [socket]);
 
   return (
@@ -112,7 +116,11 @@ const SingleChatPage = () => {
         {messages?.length ? (
           <>
             {isTyping && (
-              <div className={`${isTyping?'':''} w-fit flex bg-gray-200/70 dark:bg-white/10 px-2 py-4 rounded-md gap-2`}>
+              <div
+                className={`${
+                  isTyping ? "" : ""
+                } w-fit flex bg-gray-200/70 dark:bg-white/10 px-2 py-4 rounded-md gap-2`}
+              >
                 <div
                   className="bg-black dark:bg-white p-0.5 rounded-full animate-typing"
                   style={{ animationDelay: "0.2s" }}
