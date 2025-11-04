@@ -1,6 +1,5 @@
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
-const { emit } = require("../../../chat-app-mern/backend/models/userModel");
 
 let io = null;
 const onlineUsers = new Map();
