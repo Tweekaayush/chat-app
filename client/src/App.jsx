@@ -13,6 +13,7 @@ import SingleChatPage from "./pages/SingleChatPage";
 import AccountPage from "./pages/AccountPage";
 import BaseLayout from "./layout/BaseLayout";
 import { setOnlineUsers, setSocket } from "./features/auth.slice";
+import BASE_URL from "./constants/constants";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if(socket?.connected) return;
+    if (socket?.connected) return;
 
-    const newSocket = io(import.meta.env.VITE_SERVER_URL, {
+    const newSocket = io(BASE_URL, {
       withCredentials: true,
       transports: ["websocket"],
     });

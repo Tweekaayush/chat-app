@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
+import { CHAT_API } from "../constants/constants";
 
-const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
 
 const initialState = {
   loading: false,
@@ -17,7 +17,7 @@ export const getChats = createAsyncThunk(
   "getChats",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/chat/all`, {
+      const res = await axios.get(`${CHAT_API}/all`, {
         withCredentials: true,
       });
       return res.data;
@@ -31,7 +31,7 @@ export const createChat = createAsyncThunk(
   "createChat",
   async (payload, { rejectWithValue, dispatch }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/chat/create`, payload, {
+      const res = await axios.post(`${CHAT_API}/create`, payload, {
         withCredentials: true,
       });
 
@@ -49,7 +49,7 @@ export const getChatById = createAsyncThunk(
   "getChatById",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/chat/${payload}`, {
+      const res = await axios.get(`${CHAT_API}/${payload}`, {
         withCredentials: true,
       });
       return res.data;
@@ -63,7 +63,7 @@ export const sendMessage = createAsyncThunk(
   "sendMessage",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/chat/message/send`, payload, {
+      const res = await axios.post(`${CHAT_API}/message/send`, payload, {
         withCredentials: true,
       });
       return res.data;

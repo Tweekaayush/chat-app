@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { clearChatState } from "./chat.slice";
-
-const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
+import { AUTH_API, USER_API } from "../constants/constants";
 
 const initialState = {
   loading: "",
@@ -19,7 +18,7 @@ export const login = createAsyncThunk(
   "login",
   async (payload, { rejectWithValue, getState }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/auth/login`, payload, {
+      const res = await axios.post(`${AUTH_API}/login`, payload, {
         withCredentials: true,
       });
       return res.data;
@@ -33,7 +32,7 @@ export const signup = createAsyncThunk(
   "signup",
   async (payload, { rejectWithValue, getState }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/auth/signup`, payload, {
+      const res = await axios.post(`${AUTH_API}/signup`, payload, {
         withCredentials: true,
       });
       return res.data;
@@ -48,7 +47,7 @@ export const logout = createAsyncThunk(
   async (payload, { rejectWithValue, dispatch, getState }) => {
     try {
       const socket = getState().auth.data.socket;
-      const res = await axios.post(`${BASE_URL}/auth/logout`, payload, {
+      const res = await axios.post(`${AUTH_API}/logout`, payload, {
         withCredentials: true,
       });
       dispatch(clearChatState());
@@ -64,7 +63,7 @@ export const loadUser = createAsyncThunk(
   "loadUser",
   async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/user/me`, {
+      const res = await axios.get(`${USER_API}/me`, {
         withCredentials: true,
       });
       return res.data;
@@ -78,7 +77,7 @@ export const getUsers = createAsyncThunk(
   "getUsers",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/user?search=${payload}`, {
+      const res = await axios.get(`${USER_API}?search=${payload}`, {
         withCredentials: true,
       });
       return res.data;
@@ -92,13 +91,9 @@ export const updateUser = createAsyncThunk(
   "updateUser",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.put(
-        `${BASE_URL}/user/${payload.userId}`,
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.put(`${USER_API}/${payload.userId}`, payload, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
