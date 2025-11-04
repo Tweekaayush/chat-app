@@ -7,7 +7,7 @@ exports.generateToken = (user, statusCode, res) => {
 
   const options = {
     httpOnly: true,
-    sameSite: "Strict",
+    sameSite: "none",
     secure: process.env.NODE_ENV === "production",
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   };
