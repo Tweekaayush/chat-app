@@ -69,7 +69,7 @@ const App = () => {
     return () => {
       newSocket.disconnect();
     };
-  }, []);
+  }, [user]);
   return (
     <>
       <Routes>
