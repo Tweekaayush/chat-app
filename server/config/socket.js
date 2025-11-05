@@ -15,8 +15,14 @@ exports.initializeSocket = (server) => {
   io.use(async (socket, next) => {
     const rawCookie = socket.handshake.headers.cookie;
     if (!rawCookie) return next(new Error("Unauthorized"));
+    
+    let cookie = {};
+    rawCookie.split(";").forEach(function (el) {
+      let split = el.split("=");
+      cookie[split[0].trim()] = split.slice(1).join("=");
+    });
 
-    const token = rawCookie?.split("=")?.[1]?.trim();
+    const token = cookie['token']
 
     if (!token) return next(new Error("Unauthorized"));
 
@@ -37,7 +43,7 @@ exports.initializeSocket = (server) => {
     io.emit("online:users", Array.from(Object.keys(onlineUsers)));
 
     socket.join(`user:${userId}`);
-    
+
     socket.on("chat:join", (chatId) => {
       socket.join(`chat:${chatId}`);
       console.log(`User ${userId} left room chat: ${chatId}`);
@@ -48,13 +54,12 @@ exports.initializeSocket = (server) => {
       console.log(`User ${userId} left room chat:${chatId}`);
     });
 
-
     socket.on("chat:typing", (chatId) => {
-      socket.in(`chat:${chatId}`).emit('chat:typing');
+      socket.in(`chat:${chatId}`).emit("chat:typing");
     });
 
     socket.on("chat:stop-typing", (chatId) => {
-      socket.in(`chat:${chatId}`).emit('chat:stop-typing');
+      socket.in(`chat:${chatId}`).emit("chat:stop-typing");
     });
 
     socket.on("disconnect", () => {
