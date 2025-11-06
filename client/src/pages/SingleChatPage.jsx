@@ -24,7 +24,7 @@ const SingleChatPage = () => {
   const [isTyping, setIsTyping] = useState(false);
 
   const {
-    loading,
+    loading:{singleChatLoading, messageLoading},
     data: { singleChat, messages },
   } = useSelector((state) => state.chat);
 
@@ -111,7 +111,7 @@ const SingleChatPage = () => {
         singleChat={singleChat}
         user={user}
         onlineUsers={onlineUsers}
-        loading={loading}
+        loading={singleChatLoading}
       />
       <div className="h-full flex flex-col-reverse overflow-y-auto p-4">
         {messages?.length ? (
@@ -163,7 +163,7 @@ const SingleChatPage = () => {
         content={newMessageInfo.content}
         setNewMessageInfo={setNewMessageInfo}
         handleType={handleType}
-        loading={loading}
+        loading={messageLoading}
         media={newMessageInfo.media}
       />
     </div>

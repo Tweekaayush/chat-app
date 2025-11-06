@@ -2,9 +2,12 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { CHAT_API } from "../constants/constants";
 
-
 const initialState = {
-  loading: false,
+  loading: {
+    chatsLoading: false,
+    singleChatLoading: false,
+    messageLoading: false,
+  },
   data: {
     chats: [],
     singleChat: {},
@@ -85,7 +88,7 @@ const chatSlice = createSlice({
       const existingChatIndex = chats.findIndex(
         (c) => c._id === action.payload._id
       );
-      console.log(existingChatIndex)
+      console.log(existingChatIndex);
       if (existingChatIndex !== -1) {
         state.data.chats = [
           action.payload,
@@ -120,46 +123,46 @@ const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getChats.pending, (state, action) => {
-      state.loading = true;
+      state.loading.chatsLoading = true;
     });
     builder.addCase(getChats.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loading.chatsLoading = false;
       state.data.chats = action.payload.chats;
     });
     builder.addCase(getChats.rejected, (state, action) => {
-      state.loading = false;
+      state.loading.chatsLoading = false;
       state.error = action.payload;
     });
     builder.addCase(createChat.pending, (state, action) => {
-      state.loading = true;
+      state.loading.chatsLoading = true;
     });
     builder.addCase(createChat.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loading.chatsLoading = false;
     });
     builder.addCase(createChat.rejected, (state, action) => {
-      state.loading = false;
+      state.loading.chatsLoading = false;
       state.error = action.payload;
     });
     builder.addCase(getChatById.pending, (state, action) => {
-      state.loading = true;
+      state.loading.singleChatLoading = true;
     });
     builder.addCase(getChatById.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loading.singleChatLoading = false;
       state.data.singleChat = action.payload.chat;
       state.data.messages = action.payload.messages;
     });
     builder.addCase(getChatById.rejected, (state, action) => {
-      state.loading = false;
+      state.loading.singleChatLoading = false;
       state.error = action.payload;
     });
     builder.addCase(sendMessage.pending, (state, action) => {
-      state.loading = true;
+      state.loading.messageLoading = true;
     });
     builder.addCase(sendMessage.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loading.messageLoading = false;
     });
     builder.addCase(sendMessage.rejected, (state, action) => {
-      state.loading = false;
+      state.loading.messageLoading = false;
       state.error = action.payload;
     });
   },
@@ -171,7 +174,7 @@ export const {
   setModal,
   addNewMessage,
   updateChatLastMessage,
-  addNewChat
+  addNewChat,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

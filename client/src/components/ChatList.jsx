@@ -15,7 +15,7 @@ const ChatList = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const {
-    loading: chatsLoading,
+    loading: {chatsLoading},
     data: { chats },
   } = useSelector((state) => state.chat);
   const {
