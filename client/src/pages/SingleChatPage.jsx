@@ -164,6 +164,7 @@ const SingleChatPage = () => {
         setNewMessageInfo={setNewMessageInfo}
         handleType={handleType}
         loading={loading}
+        media={newMessageInfo.media}
       />
     </div>
   );

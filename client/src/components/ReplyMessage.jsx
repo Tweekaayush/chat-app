@@ -16,7 +16,7 @@ const ReplyMessage = ({
         update
           ? "border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-white/3"
           : incomingMsg
-          ? "bg-white/10 border-blue-800"
+          ? "bg-white/10 border-purple-800"
           : "bg-gray-100 dark:bg-white/3 border-gray-300 dark:border-gray-700"
       } flex border-l-5 border rounded-lg p-4`}
     >
@@ -33,6 +33,11 @@ const ReplyMessage = ({
           >
             {replyMessage?.sender?.name}
           </h4>
+        )}
+        {replyMessage?.media && (
+          <div className="h-30 w-fit rounded-sm border border-gray-400 dark:border-gray-600 overflow-hidden">
+            <img src={replyMessage?.media} alt={replyMessage._id} className="h-full w-full object-fit object-[50%_50%]" />
+          </div>
         )}
         <p
           className={`${

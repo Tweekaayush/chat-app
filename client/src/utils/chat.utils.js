@@ -33,7 +33,7 @@ export const getLastMessageText = (chat, user) => {
         : "Send a message",
     };
   }
-  if (lastMessage?.image) return { lastMessage: "📷 Photo" };
+  if (lastMessage?.media) return { lastMessage: "📷 Photo" };
 
   if (isGroup && lastMessage.sender) {
     return {

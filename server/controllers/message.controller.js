@@ -31,12 +31,12 @@ exports.sendMessage = asyncHandler(async (req, res) => {
   }
 
   let cloudinaryResponse;
-
+  
   if (media) {
     cloudinaryResponse = await cloudinary.uploader.upload(media, {
       folder: "chat",
     });
-    if (cloudinaryResponse?.secure_url) {
+    if (!cloudinaryResponse?.secure_url) {
       res.status(400);
       throw new Error("Failed to upload");
     }

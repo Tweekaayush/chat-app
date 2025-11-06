@@ -12,7 +12,7 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
     <div
       className={`${
         incomingMsg ? "self-start" : "self-end"
-      } w-fit grid-cols-12 last:mt-auto mb-4 cursor-pointer group flex`}
+      } w-fit last:mt-auto mb-4 cursor-pointer group flex max-w-[80%]`}
     >
       <div
         className={`${
@@ -23,6 +23,11 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
           <h4 className="text-base font-semibold text-black dark:text-white text-left">
             {message?.sender?.name}
           </h4>
+        )}
+        {message?.media && (
+          <div className="rounded-sm border border-gray-400 dark:border-gray-600 overflow-hidden">
+            <img src={message?.media} alt={message._id} />
+          </div>
         )}
         {message?.replyTo?._id && (
           <ReplyMessage
@@ -51,7 +56,7 @@ const Message = ({ message, user, singleChat, setNewMessageInfo }) => {
       </div>
       {incomingMsg && (
         <div
-          className="hidden group-hover:flex items-center justify-center"
+          className="invisible group-hover:visible flex items-center justify-center"
           onClick={() =>
             setNewMessageInfo((prev) => {
               return {
